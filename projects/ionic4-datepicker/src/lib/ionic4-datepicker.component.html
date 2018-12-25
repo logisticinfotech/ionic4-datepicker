@@ -1,0 +1,4 @@
+<ion-item (click)="openDatePicker(value)">
+    <input type="text" (focus)="$event.preventDefault()" readonly [(ngModel)]="value" start />
+    <ion-icon name="calendar" end></ion-icon>
+</ion-item>

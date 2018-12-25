@@ -9,4 +9,4 @@ This is an ionic4-datepicker npm component, which can be used in any Ionic frame
 
 ##How to use:
     => In your project folder, please install this plugin using npm 
-        npm i @logisticinfotech/ionic4-datepicker --save
+        npm install 'plugin-name' --save

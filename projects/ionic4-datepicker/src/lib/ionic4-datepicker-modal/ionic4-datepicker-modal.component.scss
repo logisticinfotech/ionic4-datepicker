@@ -1,0 +1,183 @@
+:host {
+    ion-header {
+        height: 60px;
+
+        ion-toolbar {
+            --background: #f9a200 !important;
+            height: 100%;
+            align-items: center;
+            display: flex;
+            color: white;
+
+            ion-title {
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+    }
+
+    .ionic_datepicker_modal_content {
+        .dp-month-year-container {
+            height: 15%;
+
+            ion-col {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                ion-grid {
+                    width: 100%;
+
+                    .dp-select {
+                        padding: 8px 4px;
+                        width: 100%;
+                        border: 0;
+                        border-radius: 0;
+                        border-bottom: 1.5px solid #f9a200 !important;
+                        background: transparent;
+                        position: relative;
+                        text-align: center;
+                        text-align-last: center;
+                        z-index: 1;
+                        -webkit-appearance: none;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .dp-down-arrow {
+                        position: absolute;
+                        width: 20%;
+                        right: 0;
+                        height: 45%;
+                        color: #f9a200 !important;
+                    }
+                }
+            }
+
+            .dp-left-right-arrow {
+                ion-button {
+                    --background: transparent !important;
+                    --box-shadow: unset !important;
+                    color: #f9a200 !important;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &.activated {
+                        --ion-color-primary-shade: transparent !important;
+                        --ion-color-primary-contrast: #737373 !important;
+                    }
+                }
+            }
+        }
+
+        .dp-weeks-container {
+            margin: 6% 0;
+
+            .dp-weeks-name {
+                ion-col {
+                    display: flex;
+                    justify-content: center;
+                    padding: 15px;
+
+                    .weeks {
+                        width: 14%;
+                        display: flex;
+                        justify-content: center;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .dp-days-list {
+                ion-col {
+                    display: flex;
+                    justify-content: center;
+                    padding: 10px;
+
+                    .days {
+                        width: 14%;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        .dp-selecteddate {
+            background: #f9a200 !important;
+            color: white !important;
+            border-radius: 4px;
+            font-weight: 500 !important;
+        }
+
+        .dp-today {
+            border-radius: 4px;
+            font-weight: 500 !important;
+            border: 1px solid #f9a200 !important;
+        }
+
+        .dp-pointer-events-none {
+            background: transparent;
+            border-radius: 4px;
+            font-weight: 300;
+        }
+    }
+
+    .disabled {
+        color: #AAAAAA;
+    }
+
+    ion-footer {
+        height: 55px !important;
+
+        ion-toolbar {
+            height: 100% !important;
+            --border-width: 0;
+            --padding-top: 0px;
+            --padding-bottom: 0px;
+            --padding-start: 0px;
+            --padding-end: 0px;
+
+            .toolbar-container {
+                height: 100% !important;
+            }
+
+            ion-grid {
+                height: -webkit-fill-available !important;
+
+                ion-row {
+                    height: -webkit-fill-available !important;
+
+                    ion-col {
+                        height: -webkit-fill-available !important;
+                    }
+                }
+            }
+
+            ion-button {
+                --background: #f9a200 !important;
+                --border-radius: 0;
+                width: 100%;
+                height: 55px;
+                font-size: 16px;
+                font-weight: 500 !important;
+                color: white !important;
+                margin: 0;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &.activated {
+                    --background-activated: #e69602 !important;
+                    --color-activated: white !important;
+                }
+            }
+        }
+    }
+}

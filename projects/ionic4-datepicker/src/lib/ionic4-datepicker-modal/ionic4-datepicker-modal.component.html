@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{selectedDateString}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding class="ionic_datepicker_modal_content">
+
+  <ion-grid class="dp-month-year-container">
+    <ion-row>
+
+      <ion-col size="1.5" class="dp-left-right-arrow" (click)="prevMonth()">
+        <ion-button [ngClass]="{'pointer_events_none':((firstDayEpoch - 86400000) < fromDate)}">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="9">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="5.5" no-padding>
+              <select class="dp-select" (change)="monthChanged($event)">
+                <option *ngFor="let month of mainObj?.monthsList;" [selected]="data.currentMonth == month" value="{{month}}">
+                  {{month}}
+                </option>
+              </select>
+              <ion-icon name="md-arrow-dropdown" class="dp-down-arrow"></ion-icon>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+            <ion-col size="5.5" no-padding>
+              <select class="dp-select" (change)="yearChanged($event)">
+                <option *ngFor="let year of yearsList;" [selected]="data.currentYear == year" value="{{year}}">
+                  {{year}}
+                </option>
+              </select>
+              <ion-icon name="md-arrow-dropdown" class="dp-down-arrow"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+
+      <ion-col size="1.5" class="dp-left-right-arrow" (click)="nextMonth()">
+        <ion-button [ngClass]="{'pointer_events_none':((lastDayEpoch + 86400000)> toDate)}">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="dp-weeks-container" *ngIf="daysList">
+    <ion-row class="dp-weeks-name">
+      <ion-col *ngFor="let weekName of mainObj?.weeksList;">
+        <div class="weeks">{{weekName}}</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let row of rows;" class="dp-days-list">
+      <ion-col *ngFor="let col of cols; let i = index ;" (click)="dateSelected(daysList[row + i])" no-padding [ngClass]="{'dp-selecteddate': (daysList[row + i]?.epoch === selctedDateEpoch),
+                                'dp-today' : (daysList[row + i]?.epoch == today),
+                                'disabled' : (daysList[row + i]?.disabled),
+                                'dp-pointer-events-none':((disabledDates.indexOf(daysList[row + i]?.epoch) >= 0) || (daysList[row + i]?.disabled))}">
+        <div class="days">{{daysList[row + col]?.date}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid no-padding>
+      <ion-row no-padding>
+        <ion-col size="4" no-padding>
+          <ion-button class="ion-button dp-buttons" (click)="closeIonicDatePickerModal()">
+            {{config?.closeLabel}}
+          </ion-button>
+        </ion-col>
+        <ion-col size="4" no-padding>
+          <ion-button class="ion-button dp-buttons" *ngIf="mainObj?.showTodayButton" (click)="setIonicDatePickerTodayDate()">
+            {{config?.todayLabel}}
+          </ion-button>
+        </ion-col>
+        <ion-col size="4" no-padding>
+          <ion-button class="ion-button dp-buttons" *ngIf="!mainObj?.closeOnSelect" (click)="setIonicDatePickerDate()">
+            {{config?.setLabel}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
