@@ -10,17 +10,15 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+.li-ionic4-datePicker {
+  .modal-wrapper {
+      height: 75%;
+      width: 310px;
+      border-radius: 0px;
 
-
-.ionic4-datePicker {
-    .modal-wrapper {
-        height: 75%;
-        width: 310px;
-        border-radius: 0px;
-
-        @media (min-width: 768px) {
-            width: 350px;
-            height: 65%;
-        }
-    }
+      @media (min-width: 768px) {
+          width: 350px;
+          height: 65%;
+      }
+  }
 }

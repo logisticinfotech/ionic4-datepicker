@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "ionic4",
+      "li",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "ionic4",
+      "li",
       "kebab-case"
     ]
   }

@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Ionic4DatepickerComponent } from './ionic4-datepicker.component';
-import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+import { IonicModule } from '@ionic/angular';
+
+
+import { Ionic4DatepickerComponent } from './ionic4-datepicker.component';
+import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component'
 
 @NgModule({
   declarations: [
@@ -11,9 +15,8 @@ import { CommonModule } from '@angular/common';
     Ionic4DatepickerModalComponent
   ],
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     CommonModule,
+    FormsModule,
     IonicModule
   ],
   exports: [

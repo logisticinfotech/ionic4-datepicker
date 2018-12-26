@@ -11,25 +11,17 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   useExisting: forwardRef(() => Ionic4DatepickerComponent),
   multi: true
 };
-
 @Component({
-  selector: 'ionic4-datepicker',
+  selector: 'li-ionic4-datepicker',
   templateUrl: './ionic4-datepicker.component.html',
   styleUrls: ['./ionic4-datepicker.component.scss'],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
-
 export class Ionic4DatepickerComponent implements OnInit, ControlValueAccessor {
 
-  @Input() inputDate: any;
-
-  date;
-  month;
-  year;
-  finaldate;
+  @Input() inputDateConfig: any;
 
   selectedDate: any = {};
-
   private innerValue: any = '';
 
   // Placeholders for the callbacks which are later provided
@@ -45,34 +37,35 @@ export class Ionic4DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   async openDatePicker(value) {
-    this.selectedDate.date = value;
-    if (this.inputDate.from) {
-      this.selectedDate.from = this.inputDate.from;
+    console.log('DIGVIJAY =>', this.inputDateConfig);
+    if (this.inputDateConfig.inputDate) {
+      this.selectedDate.date = this.inputDateConfig.inputDate;
     }
-    if (this.inputDate.to) {
-      this.selectedDate.to = this.inputDate.to;
+    if (value) {
+      this.selectedDate.date = value;
     }
-    // console.log('selectedDate', this.selectedDate);
     // tslint:disable-next-line:prefer-const
     let objConfig: any = {};
+    objConfig.from = this.inputDateConfig.fromDate ? this.inputDateConfig.fromDate : '';
+    objConfig.to = this.inputDateConfig.toDate ? this.inputDateConfig.toDate : '';
+    objConfig.closeOnSelect = this.inputDateConfig.closeOnSelect ? this.inputDateConfig.closeOnSelect : false;
+    // tslint:disable-next-line:triple-equals
+    objConfig.showTodayButton = this.inputDateConfig.showTodayButton == undefined ? true : this.inputDateConfig.showTodayButton;
+    objConfig.disableWeekDays = this.inputDateConfig.disableWeekDays ? this.inputDateConfig.disableWeekDays : [];
+
     objConfig.monthsList = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-    objConfig.closeOnSelect = false;
     objConfig.templateType = 'popup';
-    objConfig.from = this.selectedDate.from ? this.selectedDate.from : '';
-    objConfig.to = this.selectedDate.to ? this.selectedDate.to : '';
-    objConfig.disableWeekDays = [];
     objConfig.mondayFirst = 1;
     objConfig.weeksList = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-    objConfig.showTodayButton = true;
 
     // tslint:disable-next-line:triple-equals
     this.selectedDate.date ? objConfig.inputDate = new Date(this.selectedDate.date) : objConfig.inputDate = new Date();
 
-    // console.log('config =>', objConfig);
+    console.log('config =>', objConfig);
     // tslint:disable-next-line:prefer-const
     let datePickerModal = await this.modalCtrl.create({
       component: Ionic4DatepickerModalComponent,
-      cssClass: 'ionic4-datePicker',
+      cssClass: 'li-ionic4-datePicker',
       componentProps: { 'mainObj': objConfig }
     });
     await datePickerModal.present();

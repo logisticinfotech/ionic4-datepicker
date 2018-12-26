@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'ionic4-ionic4-datepicker-modal',
+  selector: 'li-ionic4-datepicker-modal',
   templateUrl: './ionic4-datepicker-modal.component.html',
   styleUrls: ['./ionic4-datepicker-modal.component.scss']
 })
@@ -138,12 +138,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
       this.selctedDateEpoch = selectedDate.epoch;
       this.selectedDateString = this.formatDate();
       if (this.mainObj.closeOnSelect) {
-        // $scope.mainObj.callback(this.selctedDateEpoch);
-        if (this.mainObj.templateType.toLowerCase() === 'popup') {
-          // this.popup.close();
-        } else {
-          this.closeModal(this.selctedDateEpoch);
-        }
+        this.closeModal(this.selctedDateEpoch);
       }
     }
   }

@@ -184,7 +184,7 @@
       "root": "projects/ionic4-datepicker",
       "sourceRoot": "projects/ionic4-datepicker/src",
       "projectType": "library",
-      "prefix": "ionic4",
+      "prefix": "li",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

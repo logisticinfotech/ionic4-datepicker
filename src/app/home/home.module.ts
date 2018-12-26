@@ -4,8 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { Ionic4DatepickerModule } from 'ionic4-datepicker';
+
 import { HomePage } from './home.page';
-import { Ionic4DatepickerModule } from '../../../projects/ionic4-datepicker/src/lib/ionic4-datepicker.module';
 
 @NgModule({
   imports: [

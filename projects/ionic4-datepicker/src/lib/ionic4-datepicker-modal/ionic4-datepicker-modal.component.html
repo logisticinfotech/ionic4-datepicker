@@ -74,18 +74,18 @@
   <ion-toolbar>
     <ion-grid no-padding>
       <ion-row no-padding>
-        <ion-col size="4" no-padding>
-          <ion-button class="ion-button dp-buttons" (click)="closeIonicDatePickerModal()">
+        <ion-col no-padding>
+          <ion-button class="ion-button" expand="block" (click)="closeIonicDatePickerModal()">
             {{config?.closeLabel}}
           </ion-button>
         </ion-col>
-        <ion-col size="4" no-padding>
-          <ion-button class="ion-button dp-buttons" *ngIf="mainObj?.showTodayButton" (click)="setIonicDatePickerTodayDate()">
+        <ion-col no-padding *ngIf="mainObj?.showTodayButton">
+          <ion-button class="ion-button" expand="block" (click)="setIonicDatePickerTodayDate()">
             {{config?.todayLabel}}
           </ion-button>
         </ion-col>
-        <ion-col size="4" no-padding>
-          <ion-button class="ion-button dp-buttons" *ngIf="!mainObj?.closeOnSelect" (click)="setIonicDatePickerDate()">
+        <ion-col no-padding *ngIf="!mainObj?.closeOnSelect">
+          <ion-button class="ion-button" expand="block" (click)="setIonicDatePickerDate()">
             {{config?.setLabel}}
           </ion-button>
         </ion-col>

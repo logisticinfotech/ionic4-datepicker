@@ -1,17 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  date;
-  time;
+  mydate;
   datePickerObj: any = {};
-  timePickerObj: any = {};
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
+    // EXAMPLE OBJECT
+    this.datePickerObj = {
+      fromDate: new Date('2018-12-08'), // default null
+      toDate: new Date('2018-12-28'), // default null
+      showTodayButton: true, // default true
+      closeOnSelect: false, // default false
+      disableWeekDays: [6] // default []
+    };
   }
 }
