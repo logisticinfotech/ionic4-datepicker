@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Template Driven Form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card no-margin>
+    <ion-card-header no-padding padding-top padding-start>
+      <ion-card-title>Template Driven Form</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form novalidate (submit)="onClickSubmit()" #f="ngForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input required type="text" [(ngModel)]="myTemplateDriverForm.name" name="name"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input required type="text" [(ngModel)]="myTemplateDriverForm.email" name="email"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Date : (using directive)</ion-label>
+                <ion-input [liIonic4Datepicker]="datePickerObj" name="date" required type="text" [(ngModel)]="myTemplateDriverForm.date"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-button type="submit" shape="round" expand="full" [disabled]="f.invalid">Submit</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DatePicker Directive</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-input [(ngModel)]="mydate1" [liIonic4Datepicker]="datePickerObj"></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input [(ngModel)]="mydate2" [liIonic4Datepicker]="datePickerObj"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

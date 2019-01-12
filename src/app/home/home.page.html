@@ -1,16 +1,15 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Ionic4-DatePicker Demo
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  Hey this is ionic4-datepicker test app
-
   <li-ionic4-datepicker [(ngModel)]="mydate" [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
-  <br/>
-  <p>Value of MyDate</p>
-
+  <ion-input [(ngModel)]="date" [liIonic4Datepicker]="datePickerObj" style="border: 1px solid black;margin: 10px;"></ion-input>
 </ion-content>

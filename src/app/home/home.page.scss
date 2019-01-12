@@ -1,1 +1,92 @@
+// :host {
+    // .dp-reactive-form {
+    //     .dp-form-label {
+    //         text-align: center;
 
+    //         ion-label {
+    //             font-size: 18px;
+    //             font-weight: 500;
+    //         }
+    //     }
+
+    //     ion-item {
+    //         --padding-start: 0;
+    //         --inner-border-width: 0;
+    //     }
+
+    //     ion-label {
+    //         font-size: 12px;
+    //         padding-left: 8px;
+    //     }
+
+    //     ion-input {
+    //         border-radius: 2rem;
+    //         border: 1px solid #ced4da;
+    //         --padding-start: 10px;
+    //         --padding-end: 10px;
+    //         color: #333333;
+    //     }
+
+    //     li-ionic4-datepicker {
+    //         width: 100%;
+
+    //         input {
+    //             border-radius: 2rem;
+    //             border: 1px solid #ced4da;
+    //             --padding-start: 10px;
+    //             --padding-end: 10px;
+    //             color: #333333;
+    //         }
+    //     }
+
+    //     ion-button {
+    //         border-radius: 2rem;
+    //         border: 1px solid #ced4da;
+    //     }
+    // }
+// }
+
+.icon-cal-floating {
+  position: absolute;
+  bottom: 0;
+  right: 12px;
+}
+// ion-input {
+//   button {
+//     visibility: visible !important;
+//   }
+//   .button {
+//     visibility: visible !important;
+//   }
+//   button.input-clear-icon {
+//     visibility: visible !important;
+//   }
+// }
+ion-item {
+  --border-width: 0;
+  --inner-border-width: 0;
+  --show-full-highlight: 0;
+}
+
+.ng-valid[required],
+.ng-valid.required,
+.ng-valid:not(form) {
+    border-bottom: 1px solid #42A948;
+    /* green */
+}
+
+.ng-invalid:not(form) {
+    border-bottom: 1px solid #a94442;
+    /* red */
+}
+
+.ng-pristine:not(form) {
+    border-bottom: 1px solid #ccc;
+}
+
+// .ng-touched
+// .ng-dirty
+// .ng-invalid {
+//     border: 1px solid red;
+//     border-radius: 2rem;
+// }

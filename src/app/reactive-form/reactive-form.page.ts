@@ -1,31 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-export class MyTemplateDriverForm {
-  public name: string;
-  public email: string;
-  public date: string;
-
-}
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-reactive-form',
+  templateUrl: './reactive-form.page.html',
+  styleUrls: ['./reactive-form.page.scss'],
 })
-export class HomePage implements OnInit {
+export class ReactiveFormPage implements OnInit {
 
   dataForm: FormGroup;
-
   mydate = '11 Dec 2018';
-  // mydate;
+
   date;
   datePickerObj: any = {};
 
   monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   weeksList = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-  myTemplateDriverForm: MyTemplateDriverForm;
   constructor(
     public formBuilder: FormBuilder
   ) {
@@ -34,12 +25,9 @@ export class HomePage implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       date: new FormControl('2018-12-12', [Validators.required]),
     });
-
-    this.myTemplateDriverForm = new MyTemplateDriverForm();
   }
 
   ngOnInit() {
-
     // tslint:disable-next-line:prefer-const
     let disabledDates: Date[] = [
       new Date(1545911005644),
@@ -51,6 +39,7 @@ export class HomePage implements OnInit {
 
     // EXAMPLE OBJECT
     this.datePickerObj = {
+      // clearButton : false , // default true
       // inputDate: this.mydate,
       // dateFormat: 'yyyy-MM-dd',
       // fromDate: new Date('2018-12-08'), // default null
@@ -64,8 +53,8 @@ export class HomePage implements OnInit {
       // closeLabel: 'C', // default 'Close'
       // disabledDates: disabledDates, // default []
       titleLabel: 'Select a Date', // default null
-      monthsList: this.monthsList,
-      weeksList: this.weeksList
+      // monthsList: this.monthsList,
+      // weeksList: this.weeksList
     };
   }
 

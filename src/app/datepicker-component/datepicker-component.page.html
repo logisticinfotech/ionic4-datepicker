@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DatePicker Component</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <li-ionic4-datepicker [(ngModel)]="mydate1" [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
+
+  <ion-item>
+    <li-ionic4-datepicker [(ngModel)]="mydate2" [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <li-ionic4-datepicker [(ngModel)]="mydate3" [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

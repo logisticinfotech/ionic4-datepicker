@@ -1,0 +1,23 @@
+ion-item {
+    --border-width: 0;
+    --inner-border-width: 0;
+    --show-full-highlight: 0;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+}
+
+.ng-valid[required],
+.ng-valid.required,
+.ng-valid:not(form) {
+    border-bottom: 1px solid #42A948 !important;
+    /* green */
+}
+
+.ng-invalid:not(form) {
+    border-bottom: 1px solid #a94442;
+    /* red */
+}
+
+.ng-pristine:not(form) {
+    border-bottom: 1px solid #ccc;
+}

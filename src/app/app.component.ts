@@ -9,6 +9,30 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+
+  public appPages = [
+    // {
+    //   title: 'Home',
+    //   url: '/home'
+    // },
+    {
+      title: 'Reactive Form',
+      url: '/reactive-form'
+    },
+    {
+      title: 'Template Driven Form',
+      url: '/template-driven-form'
+    },
+    {
+      title: 'DatePicker (using component)',
+      url: '/datepicker-component'
+    },
+    {
+      title: 'DatePicker (using directive)',
+      url: '/datepicker-directive'
+    }
+  ];
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

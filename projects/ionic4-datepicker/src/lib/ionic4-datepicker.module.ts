@@ -1,30 +1,35 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-
+import { LiIonic4DatepickerDirective } from './li-ionic4-datepicker.directive';
+import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component';
 import { IonicModule } from '@ionic/angular';
-
-
 import { Ionic4DatepickerComponent } from './ionic4-datepicker.component';
-import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component'
 
 @NgModule({
-  declarations: [
-    Ionic4DatepickerComponent,
-    Ionic4DatepickerModalComponent
-  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule
   ],
+  declarations: [
+    Ionic4DatepickerComponent,
+    LiIonic4DatepickerDirective,
+    Ionic4DatepickerModalComponent
+  ],
   exports: [
     Ionic4DatepickerComponent,
-    Ionic4DatepickerModalComponent
+    LiIonic4DatepickerDirective,
+    Ionic4DatepickerModalComponent,
+    CommonModule,
+    FormsModule
   ],
   entryComponents: [
+    // Ionic4DatepickerComponent,
     Ionic4DatepickerModalComponent
   ],
+  providers: [
+    DatePipe
+  ]
 })
 export class Ionic4DatepickerModule { }

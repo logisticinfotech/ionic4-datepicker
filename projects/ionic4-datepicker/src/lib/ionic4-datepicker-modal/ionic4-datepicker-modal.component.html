@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
+      <h1 *ngIf="mainObj?.titleLabel">{{mainObj?.titleLabel}}</h1>
       {{selectedDateString}}
     </ion-title>
   </ion-toolbar>
@@ -60,8 +61,7 @@
     <ion-row *ngFor="let row of rows;" class="dp-days-list">
       <ion-col *ngFor="let col of cols; let i = index ;" (click)="dateSelected(daysList[row + i])" no-padding [ngClass]="{'dp-selecteddate': (daysList[row + i]?.epoch === selctedDateEpoch),
                                 'dp-today' : (daysList[row + i]?.epoch == today),
-                                'disabled' : (daysList[row + i]?.disabled),
-                                'dp-pointer-events-none':((disabledDates.indexOf(daysList[row + i]?.epoch) >= 0) || (daysList[row + i]?.disabled))}">
+                                'disabled' : (daysList[row + i]?.disabled)}">
         <div class="days">{{daysList[row + col]?.date}}</div>
       </ion-col>
     </ion-row>
@@ -76,17 +76,17 @@
       <ion-row no-padding>
         <ion-col no-padding>
           <ion-button class="ion-button" expand="block" (click)="closeIonicDatePickerModal()">
-            {{config?.closeLabel}}
+            {{mainObj?.closeLabel}}
           </ion-button>
         </ion-col>
         <ion-col no-padding *ngIf="mainObj?.showTodayButton">
           <ion-button class="ion-button" expand="block" (click)="setIonicDatePickerTodayDate()">
-            {{config?.todayLabel}}
+            {{mainObj?.todayLabel}}
           </ion-button>
         </ion-col>
         <ion-col no-padding *ngIf="!mainObj?.closeOnSelect">
           <ion-button class="ion-button" expand="block" (click)="setIonicDatePickerDate()">
-            {{config?.setLabel}}
+            {{mainObj?.setLabel}}
           </ion-button>
         </ion-col>
       </ion-row>
