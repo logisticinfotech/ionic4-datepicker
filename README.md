@@ -2,6 +2,7 @@
 # Ionic4 DatePicker
 
 This library is inspired by rajeshwar patlolla's [Ionic1 Datepicker](https://github.com/rajeshwarpatlolla/ionic-datepicker).
+You can find our blog on [this link](https://www.logisticinfotech.com/blog/ionic4-datepicker-component)
 
 Here is how it looks
 
