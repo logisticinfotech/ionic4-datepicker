@@ -234,9 +234,13 @@ export class Ionic4DatepickerModalComponent implements OnInit {
         }
       }
 
-      if (this.fromDate && this.toDate && !disabled) {
+      if (this.fromDate && !disabled) {
         // tslint:disable-next-line: max-line-length
-        disabled = (tempDate.getTime() < this.fromDate) || (tempDate.getTime() > this.toDate) || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
+        disabled = (tempDate.getTime() < this.fromDate) || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
+      }
+      if (this.toDate && !disabled) {
+        // tslint:disable-next-line: max-line-length
+        disabled = (tempDate.getTime() > this.toDate) || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
       }
 
       this.daysList.push({

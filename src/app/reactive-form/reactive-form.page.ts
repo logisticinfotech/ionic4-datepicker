@@ -37,8 +37,26 @@ export class ReactiveFormPage implements OnInit {
       new Date('12-14-2018'), // Short format
     ];
 
-    // EXAMPLE OBJECT
     this.datePickerObj = {
+      fromDate: new Date('2018-12-20'), // need this in order to have toDate
+      toDate: new Date('2018-12-25'),
+      showTodayButton: false,
+      closeOnSelect: true,
+      disableWeekDays: [],
+      mondayFirst: true,
+      setLabel: 'Select a Date',
+      todayLabel: 'Today',
+      closeLabel: 'Close',
+      disabledDates: [],
+      titleLabel: 'Select a Date',
+      monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+      weeksList: ["S", "S", "M", "T", "W", "T", "F"],
+      dateFormat: 'MMMM d, yyyy',
+      clearButton: false
+    };
+
+    // EXAMPLE OBJECT
+    // this.datePickerObj = {
       // clearButton : false , // default true
       // inputDate: this.mydate,
       // dateFormat: 'yyyy-MM-dd',
@@ -52,10 +70,10 @@ export class ReactiveFormPage implements OnInit {
       // todayLabel: 'T', // default 'Today'
       // closeLabel: 'C', // default 'Close'
       // disabledDates: disabledDates, // default []
-      titleLabel: 'Select a Date', // default null
+      // titleLabel: 'Select a Date', // default null
       // monthsList: this.monthsList,
       // weeksList: this.weeksList
-    };
+    // };
   }
 
   onClickSubmit() {

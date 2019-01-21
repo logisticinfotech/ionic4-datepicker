@@ -134,7 +134,9 @@ export class LiIonic4DatepickerDirective implements OnInit {
     objConfig.closeLabel = config.closeLabel ? config.closeLabel : 'Close';
     objConfig.disabledDates = config.disabledDates ? config.disabledDates : [];
     objConfig.monthsList = config.monthsList ? config.monthsList : this.monthsList;
+    objConfig.monthsList = [...objConfig.monthsList];
     objConfig.weeksList = config.weeksList ? config.weeksList : this.weeksList;
+    objConfig.weeksList = [...objConfig.weeksList];
 
     // console.log('config =>', objConfig);
     // tslint:disable-next-line:prefer-const
