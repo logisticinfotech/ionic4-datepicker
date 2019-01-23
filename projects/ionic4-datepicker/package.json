@@ -1,6 +1,6 @@
 {
   "name": "@logisticinfotech/ionic4-datepicker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "ionic4-datepicker inspired by rajeshwar patlolla ionic1 datepicker",
   "keywords" :["Angular","Library", "Ionic4", "Datepicker"],
   "license" : "SEE LICENSE IN LICENSE",

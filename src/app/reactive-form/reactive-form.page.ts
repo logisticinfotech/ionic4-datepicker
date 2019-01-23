@@ -38,8 +38,8 @@ export class ReactiveFormPage implements OnInit {
     ];
 
     this.datePickerObj = {
-      fromDate: new Date('2018-12-20'), // need this in order to have toDate
-      toDate: new Date('2018-12-25'),
+      fromDate: new Date('2015-12-20'), // need this in order to have toDate
+      toDate: new Date('2019-12-25'),
       showTodayButton: false,
       closeOnSelect: true,
       disableWeekDays: [],
@@ -74,6 +74,10 @@ export class ReactiveFormPage implements OnInit {
       // monthsList: this.monthsList,
       // weeksList: this.weeksList
     // };
+  }
+
+  onChangeDate() {
+    console.log("onChangeDate date ", this.dataForm.get('date').value);
   }
 
   onClickSubmit() {

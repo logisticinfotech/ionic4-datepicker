@@ -4,13 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'reactive-form',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: './home/home.module#HomePageModule'
-  // },
+  {
+    path: 'home',
+    loadChildren: './home/home.module#HomePageModule'
+  },
   {
     path: 'reactive-form',
     loadChildren: './reactive-form/reactive-form.module#ReactiveFormPageModule'

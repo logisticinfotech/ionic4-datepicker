@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 export class MyTemplateDriverForm {
   public name: string;
@@ -15,27 +14,15 @@ export class MyTemplateDriverForm {
 })
 export class HomePage implements OnInit {
 
-  dataForm: FormGroup;
-
   mydate = '11 Dec 2018';
-  // mydate;
-  date;
+
   datePickerObj: any = {};
 
   monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   weeksList = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-  myTemplateDriverForm: MyTemplateDriverForm;
-  constructor(
-    public formBuilder: FormBuilder
-  ) {
-    this.dataForm = formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      date: new FormControl('2018-12-12', [Validators.required]),
-    });
+  constructor() {
 
-    this.myTemplateDriverForm = new MyTemplateDriverForm();
   }
 
   ngOnInit() {
@@ -52,7 +39,7 @@ export class HomePage implements OnInit {
     // EXAMPLE OBJECT
     this.datePickerObj = {
       // inputDate: this.mydate,
-      // dateFormat: 'yyyy-MM-dd',
+      dateFormat: 'yyyy-MM-dd',
       // fromDate: new Date('2018-12-08'), // default null
       // toDate: new Date('2018-12-28'), // default null
       // showTodayButton: true, // default true
@@ -69,7 +56,11 @@ export class HomePage implements OnInit {
     };
   }
 
+  onChangeDate() {
+    console.log("onChangeDate date ", this.mydate);
+  }
+
   onClickSubmit() {
-    console.log('onClickSubmit', this.dataForm.value);
+    // console.log('onClickSubmit', this.dataForm.value);
   }
 }

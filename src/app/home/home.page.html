@@ -11,5 +11,6 @@
 
 <ion-content padding>
   <li-ionic4-datepicker [(ngModel)]="mydate" [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
-  <ion-input [(ngModel)]="date" [liIonic4Datepicker]="datePickerObj" style="border: 1px solid black;margin: 10px;"></ion-input>
+  <ion-input [(ngModel)]="mydate" (ionChange)="onChangeDate()"
+    [liIonic4Datepicker]="datePickerObj" style="border: 1px solid black;margin: 10px;"></ion-input>
 </ion-content>
