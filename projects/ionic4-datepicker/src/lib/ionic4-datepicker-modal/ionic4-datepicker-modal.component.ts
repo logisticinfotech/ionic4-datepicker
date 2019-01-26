@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import { DatePipe } from '@angular/common';
+
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Component({
   selector: 'li-ionic4-datepicker-modal',
@@ -59,7 +61,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   constructor(
     private navParams: NavParams,
-    private datePipe: DatePipe,
     private modalCtrl: ModalController
   ) {
     this.today = this.resetHMSM(new Date()).getTime();
@@ -297,7 +298,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   // Setting up the initial object
   setInitialObj(ipObj) {
-    // console.log('setInitialObj =>', ipObj);
+    console.log('setInitialObj =>', ipObj);
     this.mainObj = ipObj;
     this.selctedDateEpoch = this.resetHMSM(this.mainObj.inputDate).getTime();
     this.selectedDateString = this.formatDate();
@@ -362,7 +363,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   }
 
   formatDate() {
-    return this.datePipe.transform(new Date(this.selctedDateEpoch), this.mainObj.dateFormat);
+    console.log("formatDate: ", this.selctedDateEpoch, new Date(this.selctedDateEpoch));
+    console.log("this.mainObj.dateFormat: ", this.mainObj.dateFormat);
+    console.log("with moment ", moment(this.selctedDateEpoch), moment(this.selctedDateEpoch).format(this.mainObj.dateFormat));
+
+    return moment(this.selctedDateEpoch).format(this.mainObj.dateFormat);
+
     // let dd: any = new Date(this.selctedDateEpoch).getDate();
     // // tslint:disable-next-line:prefer-const
     // let yyyy = new Date(this.selctedDateEpoch).getFullYear();
@@ -377,3 +383,4 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     // return yyyy + ' ' + this.mainObj.monthsList[new Date(this.selctedDateEpoch).getMonth()] + ' ' + dd;
   }
 }
+

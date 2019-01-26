@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LiIonic4DatepickerDirective } from './li-ionic4-datepicker.directive';
@@ -29,7 +29,7 @@ import { Ionic4DatepickerComponent } from './ionic4-datepicker.component';
     Ionic4DatepickerModalComponent
   ],
   providers: [
-    DatePipe
+
   ]
 })
 export class Ionic4DatepickerModule { }

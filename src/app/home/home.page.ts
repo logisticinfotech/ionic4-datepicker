@@ -14,7 +14,8 @@ export class MyTemplateDriverForm {
 })
 export class HomePage implements OnInit {
 
-  mydate = '11 Dec 2018';
+  // mydate = '11 Dec 2018';
+  mydate = '11-12-2018';
 
   datePickerObj: any = {};
 
@@ -39,7 +40,8 @@ export class HomePage implements OnInit {
     // EXAMPLE OBJECT
     this.datePickerObj = {
       // inputDate: this.mydate,
-      dateFormat: 'yyyy-MM-dd',
+      // dateFormat: 'yyyy-MM-dd',
+      dateFormat: 'dd-MM-YYYY',
       // fromDate: new Date('2018-12-08'), // default null
       // toDate: new Date('2018-12-28'), // default null
       // showTodayButton: true, // default true
@@ -51,8 +53,8 @@ export class HomePage implements OnInit {
       // closeLabel: 'C', // default 'Close'
       // disabledDates: disabledDates, // default []
       titleLabel: 'Select a Date', // default null
-      monthsList: this.monthsList,
-      weeksList: this.weeksList
+      // monthsList: this.monthsList,
+      // weeksList: this.weeksList
     };
   }
 
@@ -64,3 +66,4 @@ export class HomePage implements OnInit {
     // console.log('onClickSubmit', this.dataForm.value);
   }
 }
+

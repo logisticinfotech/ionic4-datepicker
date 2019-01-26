@@ -1,8 +1,11 @@
 import { Directive, Input, OnInit, HostListener, Output, EventEmitter, forwardRef, ElementRef, Renderer } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component';
-import { DatePipe } from '@angular/common';
 import { NgModel, NgControl } from '@angular/forms';
+
+import * as moment_ from 'moment';
+
+const moment = moment_;
 
 @Directive({
   selector: '[liIonic4Datepicker]',
@@ -23,16 +26,14 @@ export class LiIonic4DatepickerDirective implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    public datePipe: DatePipe,
     public ngModel: NgModel,
     public control: NgControl,
     public el: ElementRef,
-    public renderer: Renderer
+    public renderer: Renderer,
   ) { }
 
   ngOnInit() {
-    // datePipe angular link
-    // https://angular.io/api/common/DatePipe
+
     // tslint:disable-next-line:triple-equals
     if (this.inputDateConfig.clearButton || this.inputDateConfig.clearButton == undefined) {
       // tslint:disable-next-line:prefer-const
@@ -119,8 +120,13 @@ export class LiIonic4DatepickerDirective implements OnInit {
     }
     // tslint:disable-next-line:prefer-const
     let objConfig: any = {};
-    objConfig.inputDate = this.selectedDate.date ? new Date(this.selectedDate.date) : new Date();
-    objConfig.dateFormat = config.dateFormat ? config.dateFormat : 'dd MMM yyyy';
+
+    objConfig.dateFormat = config.dateFormat ? config.dateFormat : 'DD MMM YYYY';
+    console.log(this.selectedDate.date, objConfig.dateFormat);
+
+    objConfig.inputDate = this.selectedDate.date ? moment(this.selectedDate.date, objConfig.dateFormat).toDate() : new Date();
+    console.log("objConfig.inputDate : ", objConfig.inputDate);
+
     objConfig.titleLabel = config.titleLabel ? config.titleLabel : null;
     objConfig.from = config.fromDate ? config.fromDate : '';
     objConfig.to = config.toDate ? config.toDate : '';
@@ -154,7 +160,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
         if (data.data && data.data.date) {
           this.selectedDate.date = data.data.date;
           // tslint:disable-next-line:prefer-const
-          let formattedDate = this.datePipe.transform(new Date(this.selectedDate.date), objConfig.dateFormat);
+          let formattedDate = moment(data.data.date).format(objConfig.dateFormat);
           // console.log('FORMATTED DATE =>', formattedDate);
           this.control.control.setValue(formattedDate);
           this.ngModel.update.emit(formattedDate);
@@ -162,3 +168,4 @@ export class LiIonic4DatepickerDirective implements OnInit {
       });
   }
 }
+
