@@ -54,6 +54,9 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   weeksList = ['Sun', 'Mon', 'Tue', 'Wed', 'thu', 'Fri', 'Sat'];
   yearsList = [];
   daysList = [];
+  yearInAscending = false;
+
+  momentLocale = 'en-US';
 
   //
   selectedDateString;
@@ -178,7 +181,9 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   // Refresh the list of the dates of a month
   refreshDateList(currentDate) {
     // console.log('refreshDateList =>', currentDate);
+    // console.log('currentDate before ', this.currentDate);
     currentDate = this.resetHMSM(currentDate);
+    // console.log('currentDate after ', currentDate);
     this.currentDate = currentDate;
 
     // tslint:disable-next-line:prefer-const
@@ -266,6 +271,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     this.cols = [0, 1, 2, 3, 4, 5, 6];
 
     this.data.currentMonth = this.mainObj.monthsList[currentDate.getMonth()];
+    // console.log('currentDate.getMonth() ' + currentDate.getMonth());
     this.data.currentYear = currentDate.getFullYear();
     this.data.currentMonthSelected = this.data.currentMonth;
     this.currentYearSelected = this.data.currentYear;
@@ -280,7 +286,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     }
     // tslint:disable-next-line:prefer-const
     let monthNumber = this.monthsList.indexOf(this.data.currentMonth);
+    // console.log('monthChanged monthNumber : ' + monthNumber + ' event.target.value : ' + event.target.value);
+    // console.log('currentDate before ', this.currentDate);
+    this.currentDate.setDate(1);
     this.currentDate.setMonth(monthNumber);
+    // console.log('currentDate after ', this.currentDate);
+
     this.refreshDateList(this.currentDate);
     // this.changeDaySelected();
   }
@@ -298,7 +309,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   // Setting up the initial object
   setInitialObj(ipObj) {
-    console.log('setInitialObj =>', ipObj);
+    // console.log('setInitialObj =>', ipObj);
     this.mainObj = ipObj;
     this.selctedDateEpoch = this.resetHMSM(this.mainObj.inputDate).getTime();
     this.selectedDateString = this.formatDate();
@@ -309,6 +320,13 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     if (this.mainObj.mondayFirst) {
       this.weeksList.push(this.mainObj.weeksList.shift());
     }
+    if (this.mainObj.yearInAscending) {
+      this.yearInAscending = this.mainObj.yearInAscending;
+    }
+    if (this.mainObj.momentLocale) {
+      this.momentLocale = this.mainObj.momentLocale;
+    }
+
     this.disableWeekdays = this.mainObj.disableWeekDays;
 
     this.setDisabledDates(this.mainObj);
@@ -339,8 +357,16 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     let maxYear = new Date().getFullYear() + 1;
     minYear = from ? new Date(from).getFullYear() : minYear;
     maxYear = to ? new Date(to).getFullYear() : maxYear;
-    for (let i = maxYear; i >= minYear; i--) {
-      yearsList.push(i);
+
+    console.log('getYearsList: ', this.yearInAscending);
+    if (this.yearInAscending) {
+      for (let i = minYear; i <= maxYear; i++) {
+        yearsList.push(i);
+      }
+    } else {
+      for (let i = maxYear; i >= minYear; i--) {
+        yearsList.push(i);
+      }
     }
     return yearsList;
   }
@@ -363,10 +389,10 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   }
 
   formatDate() {
-    console.log("formatDate: ", this.selctedDateEpoch, new Date(this.selctedDateEpoch));
-    console.log("this.mainObj.dateFormat: ", this.mainObj.dateFormat);
-    console.log("with moment ", moment(this.selctedDateEpoch), moment(this.selctedDateEpoch).format(this.mainObj.dateFormat));
-
+    // console.log('formatDate: ', this.selctedDateEpoch, new Date(this.selctedDateEpoch));
+    // console.log('this.mainObj.dateFormat: ', this.mainObj.dateFormat);
+    // console.log('with moment ', moment(this.selctedDateEpoch), moment(this.selctedDateEpoch).format(this.mainObj.dateFormat));
+    // moment.locale(this.momentLocale);
     return moment(this.selctedDateEpoch).format(this.mainObj.dateFormat);
 
     // let dd: any = new Date(this.selctedDateEpoch).getDate();

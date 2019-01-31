@@ -18,7 +18,10 @@ export class HomePage implements OnInit {
   mydate = '11-12-2018';
 
   datePickerObj: any = {};
+  datePickerObjPtBr: any = {};
+  mydatePtBr = '06 Fev 2019';
 
+  isDisableDatePicker: false;
   monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   weeksList = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
@@ -40,8 +43,8 @@ export class HomePage implements OnInit {
     // EXAMPLE OBJECT
     this.datePickerObj = {
       // inputDate: this.mydate,
-      // dateFormat: 'yyyy-MM-dd',
-      dateFormat: 'dd-MM-YYYY',
+      // dateFormat: 'yyyy-MM-DD',
+      dateFormat: 'DD-MM-YYYY',
       // fromDate: new Date('2018-12-08'), // default null
       // toDate: new Date('2018-12-28'), // default null
       // showTodayButton: true, // default true
@@ -54,12 +57,27 @@ export class HomePage implements OnInit {
       // disabledDates: disabledDates, // default []
       titleLabel: 'Select a Date', // default null
       // monthsList: this.monthsList,
-      // weeksList: this.weeksList
+      // weeksList: this.weeksList,
+      yearInAscending: true
+
+    };
+
+    this.datePickerObjPtBr = {
+      dateFormat: 'DD MMM YYYY',
+      closeOnSelect: true,
+      setLabel: 'OK',
+      todayLabel: 'Hoje',
+      closeLabel: 'Fechar',
+      titleLabel: 'Selecione uma data',
+      monthsList: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      weeksList: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      clearButton: false,
+      momentLocale: 'pt-BR'
     };
   }
 
   onChangeDate() {
-    console.log("onChangeDate date ", this.mydate);
+    console.log('onChangeDate date ', this.mydate);
   }
 
   onClickSubmit() {

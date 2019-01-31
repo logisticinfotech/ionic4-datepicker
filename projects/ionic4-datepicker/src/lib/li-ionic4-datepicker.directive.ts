@@ -33,7 +33,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    console.log('config.yearInAscending : ' + this.inputDateConfig.yearInAscending);
     // tslint:disable-next-line:triple-equals
     if (this.inputDateConfig.clearButton || this.inputDateConfig.clearButton == undefined) {
       // tslint:disable-next-line:prefer-const
@@ -121,28 +121,35 @@ export class LiIonic4DatepickerDirective implements OnInit {
     // tslint:disable-next-line:prefer-const
     let objConfig: any = {};
 
-    objConfig.dateFormat = config.dateFormat ? config.dateFormat : 'DD MMM YYYY';
-    console.log(this.selectedDate.date, objConfig.dateFormat);
-
-    objConfig.inputDate = this.selectedDate.date ? moment(this.selectedDate.date, objConfig.dateFormat).toDate() : new Date();
-    console.log("objConfig.inputDate : ", objConfig.inputDate);
-
-    objConfig.titleLabel = config.titleLabel ? config.titleLabel : null;
     objConfig.from = config.fromDate ? config.fromDate : '';
     objConfig.to = config.toDate ? config.toDate : '';
+    objConfig.showTodayButton = config.showTodayButton === undefined ? true : config.showTodayButton;
     objConfig.closeOnSelect = config.closeOnSelect ? config.closeOnSelect : false;
-    // tslint:disable-next-line:triple-equals
-    objConfig.showTodayButton = config.showTodayButton == undefined ? true : config.showTodayButton;
     objConfig.disableWeekDays = config.disableWeekDays ? config.disableWeekDays : [];
     objConfig.mondayFirst = config.mondayFirst ? config.mondayFirst : false;
     objConfig.setLabel = config.setLabel ? config.setLabel : 'Set';
     objConfig.todayLabel = config.todayLabel ? config.todayLabel : 'Today';
     objConfig.closeLabel = config.closeLabel ? config.closeLabel : 'Close';
     objConfig.disabledDates = config.disabledDates ? config.disabledDates : [];
+    objConfig.titleLabel = config.titleLabel ? config.titleLabel : null;
+
     objConfig.monthsList = config.monthsList ? config.monthsList : this.monthsList;
     objConfig.monthsList = [...objConfig.monthsList];
+
     objConfig.weeksList = config.weeksList ? config.weeksList : this.weeksList;
     objConfig.weeksList = [...objConfig.weeksList];
+
+    objConfig.dateFormat = config.dateFormat ? config.dateFormat : 'DD MMM YYYY';
+    // console.log(this.selectedDate.date, objConfig.dateFormat, moment.locale());
+
+    objConfig.clearButton = config.clearButton ? config.clearButton : false;
+
+    objConfig.yearInAscending = config.yearInAscending ? config.yearInAscending : false;
+    objConfig.momentLocale = config.momentLocale ? config.momentLocale : 'en-US';
+
+    moment.locale(objConfig.momentLocale);
+    objConfig.inputDate = this.selectedDate.date ? moment(this.selectedDate.date, objConfig.dateFormat).toDate() : new Date();
+    // console.log('objConfig.inputDate : ', objConfig.inputDate);
 
     // console.log('config =>', objConfig);
     // tslint:disable-next-line:prefer-const
