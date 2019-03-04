@@ -11,14 +11,24 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 .li-ionic4-datePicker {
-  .modal-wrapper {
-      height: 75%;
-      width: 310px;
-      border-radius: 0px;
+    .modal-wrapper {
+        height: 75%;
+        max-height: 478px;
+        width: 312px;
+        border-radius: 0px;
+        --ion-color-primary: red; // This Variable used for the change of colour ion-datepicker only.
+        --ion-color-primary-tint: rgb(214, 153, 153); // This Variable changes the tint colour of background when click button.
 
-      @media (min-width: 768px) {
-          width: 350px;
-          height: 65%;
-      }
-  }
+        ion-button {
+            // --ion-color-primary: green; // This Variable used for the change colour of buttons only.
+            // --ion-color-primary-tint: lightgreen; // This Variable changes the tint color of background when click buttons.
+            // --border-radious: 0px; // This Variable changes the border radious of buttons.
+            // button customization css write here...
+        }
+
+        @media (min-width: 768px) {
+            width: 350px;
+            height: 65%;
+        }
+    }
 }

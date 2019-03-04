@@ -1,32 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
-import * as moment_ from 'moment';
-const moment = moment_;
+import { Ionic4DatepickerModalComponent } from 'ionic4-datepicker';
+
 @Component({
-  selector: 'app-reactive-form',
-  templateUrl: './reactive-form.page.html',
-  styleUrls: ['./reactive-form.page.scss'],
+  selector: 'app-datepicker-button',
+  templateUrl: './datepicker-button.page.html',
+  styleUrls: ['./datepicker-button.page.scss'],
 })
-export class ReactiveFormPage implements OnInit {
+export class DatepickerButtonPage implements OnInit {
 
-  dataForm: FormGroup;
-
-  date;
   datePickerObj: any = {};
+  selectedDate;
 
   monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   weeksList = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   constructor(
-    public formBuilder: FormBuilder
-  ) {
-    this.dataForm = formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      date: new FormControl('', [Validators.required]),
-    });
-  }
+    public modalCtrl: ModalController
+  ) { }
 
   ngOnInit() {
     const disabledDates: Date[] = [
@@ -42,7 +34,7 @@ export class ReactiveFormPage implements OnInit {
       // inputDate: new Date('2018'), // If you want to set year in dateObject of date-picker
       // inputDate: new Date('2018-12'), // If you want to set year & month in dateObject of date-picker
       // inputDate: new Date('2018-12-01'), // If you want to set date in dateObject of date-picker
-      // inputDate: '1', // If you want to set date as a string in date-picker
+      // inputDate: '12', // If you want to set date as a string in date-picker
       // inputDate: '2018', // If you want to set date as a string in date-picker
       // inputDate: '2018-12', // If you want to set date as a string in date-picker
       // inputDate: '2018-12-12', // If you want to set date as a string in date-picker
@@ -82,11 +74,20 @@ export class ReactiveFormPage implements OnInit {
     };
   }
 
-  onChangeDate() {
-    console.log('onChangeDate date ', this.dataForm.get('date').value);
+  async openDatePicker() {
+    const datePickerModal = await this.modalCtrl.create({
+      component: Ionic4DatepickerModalComponent,
+      cssClass: 'li-ionic4-datePicker',
+      componentProps: { 'objConfig': this.datePickerObj }
+    });
+    await datePickerModal.present();
+
+    datePickerModal.onDidDismiss()
+      .then((data) => {
+        // this.isModalOpen = false;
+        console.log(data);
+        this.selectedDate = data.data.date;
+      });
   }
 
-  onClickSubmit() {
-    console.log('onClickSubmit', this.dataForm.value);
-  }
 }

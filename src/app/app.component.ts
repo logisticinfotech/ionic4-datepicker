@@ -30,6 +30,10 @@ export class AppComponent {
     {
       title: 'DatePicker (using directive)',
       url: '/datepicker-directive'
+    },
+    {
+      title: 'DatePicker (using Button)',
+      url: '/datepicker-button'
     }
   ];
 

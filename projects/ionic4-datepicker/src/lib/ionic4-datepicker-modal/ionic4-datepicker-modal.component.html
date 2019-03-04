@@ -7,17 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content no-padding class="ionic_datepicker_modal_content">
 
   <ion-grid class="dp-month-year-container">
     <ion-row>
-
       <ion-col size="1.5" class="dp-left-right-arrow" (click)="prevMonth()">
         <ion-button [ngClass]="{'pointer_events_none':((firstDayEpoch - 86400000) < fromDate)}">
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-col>
-
       <ion-col size="9">
         <ion-grid>
           <ion-row>
@@ -41,13 +40,11 @@
           </ion-row>
         </ion-grid>
       </ion-col>
-
       <ion-col size="1.5" class="dp-left-right-arrow" (click)="nextMonth()">
         <ion-button [ngClass]="{'pointer_events_none':((lastDayEpoch + 86400000)> toDate)}">
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-col>
-
     </ion-row>
   </ion-grid>
 
@@ -57,7 +54,6 @@
         <div class="weeks">{{weekName}}</div>
       </ion-col>
     </ion-row>
-
     <ion-row *ngFor="let row of rows;" class="dp-days-list">
       <ion-col *ngFor="let col of cols; let i = index ;" (click)="dateSelected(daysList[row + i])" no-padding [ngClass]="{'dp-selecteddate': (daysList[row + i]?.epoch === selctedDateEpoch),
                                 'dp-today' : (daysList[row + i]?.epoch == today),
@@ -73,19 +69,25 @@
 <ion-footer>
   <ion-toolbar>
     <ion-grid no-padding>
-      <ion-row no-padding>
+      <ion-row no-padding [ngClass]="mainObj?.btnCloseSetInReverse ? 'dp-btn-set-close-in-reverse' : ''">
         <ion-col no-padding>
-          <ion-button class="ion-button" expand="block" (click)="closeIonicDatePickerModal()">
+          <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}" fill="{{mainObj?.btnProperties?.fill}}"
+            size="{{mainObj?.btnProperties?.size}}" color="{{mainObj?.btnProperties?.color}}" disabled="{{mainObj?.btnProperties?.disabled}}"
+            strong="{{mainObj?.btnProperties?.strong}}" (click)="closeIonicDatePickerModal()">
             {{mainObj?.closeLabel}}
           </ion-button>
         </ion-col>
         <ion-col no-padding *ngIf="mainObj?.showTodayButton">
-          <ion-button class="ion-button" expand="block" (click)="setIonicDatePickerTodayDate()">
+          <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}" fill="{{mainObj?.btnProperties?.fill}}"
+            size="{{mainObj?.btnProperties?.size}}" color="{{mainObj?.btnProperties?.color}}" disabled="{{mainObj?.btnProperties?.disabled}}"
+            strong="{{mainObj?.btnProperties?.strong}}" (click)="setIonicDatePickerTodayDate()">
             {{mainObj?.todayLabel}}
           </ion-button>
         </ion-col>
         <ion-col no-padding *ngIf="!mainObj?.closeOnSelect">
-          <ion-button class="ion-button" expand="block" (click)="setIonicDatePickerDate()">
+          <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}" fill="{{mainObj?.btnProperties?.fill}}"
+            size="{{mainObj?.btnProperties?.size}}" color="{{mainObj?.btnProperties?.color}}" disabled="{{mainObj?.btnProperties?.disabled}}"
+            strong="{{mainObj?.btnProperties?.strong}}" (click)="setIonicDatePickerDate()">
             {{mainObj?.setLabel}}
           </ion-button>
         </ion-col>

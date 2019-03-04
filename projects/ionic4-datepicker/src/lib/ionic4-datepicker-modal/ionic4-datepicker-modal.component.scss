@@ -72,7 +72,7 @@
             .dp-left-right-arrow {
                 ion-button {
                     --background: transparent !important;
-                    --box-shadow: unset !important;
+                    --box-shadow: 0 !important;
                     color: var(--ion-color-primary) !important;
 
                     &:focus {
@@ -88,7 +88,7 @@
         }
 
         .dp-weeks-container {
-            margin: 6% 0;
+            margin: 15px 0;
 
             .dp-weeks-name {
                 ion-col {
@@ -109,6 +109,7 @@
                     display: flex;
                     justify-content: center;
                     padding: 10px;
+                    cursor: pointer;
 
                     .days {
                         width: 14%;
@@ -163,16 +164,20 @@
                         height: -webkit-fill-available !important;
                     }
                 }
+
+                .dp-btn-set-close-in-reverse {
+                    flex-direction: row-reverse;
+                }
             }
 
             ion-button {
-                --background: var(--ion-color-primary) !important;
+                // --background: var(--ion-color-primary) !important;
                 --border-radius: 0;
-                width: 100%;
+                // width: 100%;
                 height: 55px;
-                font-size: 16px;
-                font-weight: 500 !important;
-                color: var(--ion-color-primary-contrast) !important;
+                // font-size: 16px;
+                // font-weight: 500 !important;
+                // color: var(--ion-color-primary-contrast) !important;
                 margin: 0;
 
                 &:focus {

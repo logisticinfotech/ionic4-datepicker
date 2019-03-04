@@ -32,9 +32,7 @@
             <ion-col size="12">
               <ion-item>
                 <ion-label position="floating">Date : (using directive)</ion-label>
-                <ion-input [liIonic4Datepicker]="datePickerObj" type="text"
-                  formControlName="date"
-                  (ionChange)="onChangeDate()"></ion-input>
+                <ion-input readonly [liIonic4Datepicker]="datePickerObj" type="text" formControlName="date" (ionChange)="onChangeDate()"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="12">

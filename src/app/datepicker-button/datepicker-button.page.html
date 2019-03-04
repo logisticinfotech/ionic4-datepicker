@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DatePicker using Button</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+        <ion-input readonly [(ngModel)]="selectedDate"></ion-input>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button (click)="openDatePicker()">Open</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

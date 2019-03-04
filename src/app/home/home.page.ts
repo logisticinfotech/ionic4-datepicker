@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Ionic4DatepickerModalComponent } from 'ionic4-datepicker';
+import { ModalController } from '@ionic/angular';
 
 export class MyTemplateDriverForm {
   public name: string;
   public email: string;
   public date: string;
-
 }
 
 @Component({
@@ -14,7 +15,6 @@ export class MyTemplateDriverForm {
 })
 export class HomePage implements OnInit {
 
-  // mydate = '11 Dec 2018';
   mydate = '11-12-2018';
 
   datePickerObj: any = {};
@@ -25,14 +25,14 @@ export class HomePage implements OnInit {
   monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   weeksList = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-  constructor() {
+  selectedDate;
 
-  }
+  constructor(
+    public modalCtrl: ModalController
+  ) { }
 
   ngOnInit() {
-
-    // tslint:disable-next-line:prefer-const
-    let disabledDates: Date[] = [
+    const disabledDates: Date[] = [
       new Date(1545911005644),
       new Date(),
       new Date(2018, 12, 12), // Months are 0-based, this is August, 10th.
@@ -42,6 +42,11 @@ export class HomePage implements OnInit {
 
     // EXAMPLE OBJECT
     this.datePickerObj = {
+      // inputDate: new Date('12'), // If you want to set month in date-picker
+      // inputDate: new Date('2018'), // If you want to set year in date-picker
+      // inputDate: new Date('2018-12'), // If you want to set year & month in date-picker
+      inputDate: new Date('2018-12-01'), // If you want to set date in date-picker
+
       // inputDate: this.mydate,
       // dateFormat: 'yyyy-MM-DD',
       dateFormat: 'DD-MM-YYYY',
@@ -58,8 +63,8 @@ export class HomePage implements OnInit {
       titleLabel: 'Select a Date', // default null
       // monthsList: this.monthsList,
       // weeksList: this.weeksList,
+      momentLocale: 'pt-BR',
       yearInAscending: true
-
     };
 
     this.datePickerObjPtBr = {
@@ -82,6 +87,22 @@ export class HomePage implements OnInit {
 
   onClickSubmit() {
     // console.log('onClickSubmit', this.dataForm.value);
+  }
+
+  async openDatePicker() {
+    const datePickerModal = await this.modalCtrl.create({
+      component: Ionic4DatepickerModalComponent,
+      cssClass: 'li-ionic4-datePicker',
+      componentProps: { 'objConfig': this.datePickerObjPtBr }
+    });
+    await datePickerModal.present();
+
+    datePickerModal.onDidDismiss()
+      .then((data) => {
+        // this.isModalOpen = false;
+        console.log(data);
+        this.selectedDate = data.data.date;
+      });
   }
 }
 

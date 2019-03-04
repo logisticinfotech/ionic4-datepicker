@@ -23,8 +23,7 @@
       <ion-col size="12">
         <ion-item>
           <ion-label position="floating">Directive way</ion-label>
-          <ion-input [(ngModel)]="mydate" (ionChange)="onChangeDate()"
-            [liIonic4Datepicker]="datePickerObj"></ion-input>
+          <ion-input readonly [(ngModel)]="mydate" (ionChange)="onChangeDate()" [liIonic4Datepicker]="datePickerObj"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -32,7 +31,7 @@
       <ion-col size="12">
         <ion-item>
           <ion-label position="floating">Directive way Disabled</ion-label>
-          <ion-input [(ngModel)]="mydatePtBr" (ionChange)="onChangeDate()" [disabled]="isDisableDatePicker"
+          <ion-input readonly [(ngModel)]="mydatePtBr" (ionChange)="onChangeDate()" [disabled]="isDisableDatePicker"
             [liIonic4Datepicker]="datePickerObjPtBr"></ion-input>
         </ion-item>
       </ion-col>
@@ -43,6 +42,14 @@
           <ion-label>Make above enable/disable</ion-label>
           <ion-toggle [(ngModel)]="isDisableDatePicker"></ion-toggle>
         </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10">
+        <ion-input readonly [(ngModel)]="selectedDate"></ion-input>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button (click)="openDatePicker()">Open</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'datepicker-directive',
     loadChildren: './datepicker-directive/datepicker-directive.module#DatepickerDirectivePageModule'
+  },
+  {
+    path: 'datepicker-button',
+    loadChildren: './datepicker-button/datepicker-button.module#DatepickerButtonPageModule'
   }
 ];
 

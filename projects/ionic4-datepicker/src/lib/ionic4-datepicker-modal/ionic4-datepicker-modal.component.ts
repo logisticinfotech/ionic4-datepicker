@@ -11,26 +11,12 @@ const moment = moment_;
 })
 export class Ionic4DatepickerModalComponent implements OnInit {
 
-  // default config
-  // config = {
-  //   inputDate: new Date(),
-  //   titleLabel: null,
-  //   setLabel: 'Set',
-  //   todayLabel: 'Today',
-  //   closeLabel: 'Close',
-  //   mondayFirst: true,
-  //   showTodayButton: false,
-  //   closeOnSelect: false,
-  //   disableWeekdays: [],
-  //   weeksList: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-  //   monthsList: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-  // };
-
   currentDate;
   today;
 
   // inputs
   mainObj: any = {};
+  selectedDate: any = {};
 
   // component variables
   selctedDateEpoch;
@@ -50,24 +36,27 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   rows = [0, 7, 14, 21, 28, 35];
   cols = [0, 1, 2, 3, 4, 5, 6];
-  monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  weeksList = ['Sun', 'Mon', 'Tue', 'Wed', 'thu', 'Fri', 'Sat'];
+  monthsList = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  weeksList = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   yearsList = [];
   daysList = [];
   yearInAscending = false;
 
   momentLocale = 'en-US';
 
-  //
   selectedDateString;
-  //
 
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController
   ) {
     this.today = this.resetHMSM(new Date()).getTime();
-    this.mainObj = this.navParams.get('mainObj');
+    if (this.navParams.get('selectedDate')) {
+      // console.log('Selected date =>', this.navParams.get('selectedDate'));
+      this.selectedDate.date = this.navParams.get('selectedDate');
+    }
+    this.mainObj = this.initDatePickerObj(this.navParams.get('objConfig'));
+    // console.log('Main Object =>', this.mainObj, this.selectedDate.date);
   }
 
   ngOnInit() {
@@ -114,8 +103,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   // changeDaySelected ( day selection changes )
   changeDaySelected() {
     // console.log('changeDaySelected');
-    // tslint:disable-next-line:prefer-const
-    let newSelectedDate: any = new Date(this.selctedDateEpoch);
+    const newSelectedDate: any = new Date(this.selctedDateEpoch);
     newSelectedDate.setMonth(this.currentDate.getMonth());
     newSelectedDate.setYear(this.currentDate.getFullYear());
 
@@ -140,10 +128,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   // Set today as date for the modal
   setIonicDatePickerTodayDate() {
     // console.log('setIonicDatePickerTodayDate');
-    // tslint:disable-next-line:prefer-const
-    let today = new Date(this.today);
-    // tslint:disable-next-line:prefer-const
-    let today_obj = {
+    const today = new Date(this.today);
+    const today_obj = {
       date: today.getDate(),
       month: today.getMonth(),
       year: today.getFullYear(),
@@ -186,10 +172,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     // console.log('currentDate after ', currentDate);
     this.currentDate = currentDate;
 
-    // tslint:disable-next-line:prefer-const
-    let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDate();
-    // tslint:disable-next-line:prefer-const
-    let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+    const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDate();
+    const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
 
     this.monthsList = [];
     if (this.mainObj.monthsList && this.mainObj.monthsList.length === 12) {
@@ -203,24 +187,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     let tempDate, disabled;
     this.firstDayEpoch = this.resetHMSM(new Date(currentDate.getFullYear(), currentDate.getMonth(), firstDay)).getTime();
     this.lastDayEpoch = this.resetHMSM(new Date(currentDate.getFullYear(), currentDate.getMonth(), lastDay)).getTime();
-
-    // for (let i = firstDay; i <= lastDay; i++) {
-    //   tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
-
-    //   if (this.fromDate && this.toDate) {
-    // tslint:disable-next-line:max-line-length
-    //     disabled = (tempDate.getTime() < this.fromDate) || (tempDate.getTime() > this.toDate) || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
-    //   }
-
-    //   this.daysList.push({
-    //     date: tempDate.getDate(),
-    //     month: tempDate.getMonth(),
-    //     year: tempDate.getFullYear(),
-    //     day: tempDate.getDay(),
-    //     epoch: tempDate.getTime(),
-    //     disabled: disabled
-    //   });
-    // }
 
     for (let i = firstDay; i <= lastDay; i++) {
       tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
@@ -241,12 +207,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
       }
 
       if (this.fromDate && !disabled) {
-        // tslint:disable-next-line: max-line-length
-        disabled = (tempDate.getTime() < this.fromDate) || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
+        disabled = (tempDate.getTime() < this.fromDate)
+          || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
       }
       if (this.toDate && !disabled) {
-        // tslint:disable-next-line: max-line-length
-        disabled = (tempDate.getTime() > this.toDate) || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
+        disabled = (tempDate.getTime() > this.toDate)
+          || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
       }
 
       this.daysList.push({
@@ -284,14 +250,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     if (event && event.target && event.target.value) {
       this.data.currentMonth = event.target.value;
     }
-    // tslint:disable-next-line:prefer-const
-    let monthNumber = this.monthsList.indexOf(this.data.currentMonth);
+    const monthNumber = this.monthsList.indexOf(this.data.currentMonth);
     // console.log('monthChanged monthNumber : ' + monthNumber + ' event.target.value : ' + event.target.value);
     // console.log('currentDate before ', this.currentDate);
     this.currentDate.setDate(1);
     this.currentDate.setMonth(monthNumber);
     // console.log('currentDate after ', this.currentDate);
-
     this.refreshDateList(this.currentDate);
     // this.changeDaySelected();
   }
@@ -313,7 +277,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     this.mainObj = ipObj;
     this.selctedDateEpoch = this.resetHMSM(this.mainObj.inputDate).getTime();
     this.selectedDateString = this.formatDate();
-
     if (this.mainObj.weeksList && this.mainObj.weeksList.length === 7) {
       this.weeksList = this.mainObj.weeksList;
     }
@@ -328,8 +291,9 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     }
 
     this.disableWeekdays = this.mainObj.disableWeekDays;
-
     this.setDisabledDates(this.mainObj);
+
+    // console.log('INPUT DATE =>' , this.mainObj.inputDate);
     this.refreshDateList(this.mainObj.inputDate);
   }
 
@@ -337,7 +301,9 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   closeModal(selectedDate) {
     // console.log('closeModal => ', selectedDate);
     this.modalCtrl.getTop();
-    this.modalCtrl.dismiss({ 'date': selectedDate });
+    // this.selectedDate.date = selectedDate;
+    const formattedDate = moment(selectedDate).format(this.mainObj.dateFormat);
+    this.modalCtrl.dismiss({ 'date': formattedDate });
   }
 
   // close modal button
@@ -349,16 +315,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   // get years list  ( GIVE HERE MIN OR MAX YEAR IN DATE_PICKER )
   getYearsList(from, to) {
     // console.log('getYearsList =>', from, to);
-    // tslint:disable-next-line:prefer-const
-    let yearsList = [];
+    const yearsList = [];
     let minYear = 1950;
-    // let maxYear = 2100;
-    // let minYear = 2000;
     let maxYear = new Date().getFullYear() + 1;
     minYear = from ? new Date(from).getFullYear() : minYear;
     maxYear = to ? new Date(to).getFullYear() : maxYear;
-
-    console.log('getYearsList: ', this.yearInAscending);
+    // console.log('getYearsList: ', this.yearInAscending);
     if (this.yearInAscending) {
       for (let i = minYear; i <= maxYear; i++) {
         yearsList.push(i);
@@ -388,25 +350,71 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     this.setInitialObj(this.mainObj);
   }
 
+  // Init DatePicker Object
+  initDatePickerObj(config) {
+    // const config = this.mainObj;
+
+    if (config.inputDate && !this.selectedDate.date) {
+      this.selectedDate.date = config.inputDate;
+    }
+
+    const objConfig: any = {};
+    objConfig.from = config.fromDate ? config.fromDate : '';
+    objConfig.to = config.toDate ? config.toDate : '';
+    objConfig.showTodayButton = config.showTodayButton === undefined ? true : config.showTodayButton;
+    objConfig.closeOnSelect = config.closeOnSelect ? config.closeOnSelect : false;
+    objConfig.disableWeekDays = config.disableWeekDays ? config.disableWeekDays : [];
+    objConfig.mondayFirst = config.mondayFirst ? config.mondayFirst : false;
+    objConfig.setLabel = config.setLabel ? config.setLabel : 'Set';
+    objConfig.todayLabel = config.todayLabel ? config.todayLabel : 'Today';
+    objConfig.closeLabel = config.closeLabel ? config.closeLabel : 'Close';
+    objConfig.disabledDates = config.disabledDates ? config.disabledDates : [];
+    objConfig.titleLabel = config.titleLabel ? config.titleLabel : null;
+
+    objConfig.monthsList = config.monthsList ? config.monthsList : this.monthsList;
+    objConfig.monthsList = [...objConfig.monthsList];
+
+    objConfig.weeksList = config.weeksList ? config.weeksList : this.weeksList;
+    objConfig.weeksList = [...objConfig.weeksList];
+
+    objConfig.dateFormat = config.dateFormat ? config.dateFormat : 'DD MMM YYYY';
+    // console.log(this.selectedDate.date, objConfig.dateFormat, moment.locale());
+
+    objConfig.clearButton = config.clearButton ? config.clearButton : false;
+
+    objConfig.yearInAscending = config.yearInAscending ? config.yearInAscending : false;
+    objConfig.momentLocale = config.momentLocale ? config.momentLocale : 'en-US';
+
+    moment.locale(objConfig.momentLocale);
+    objConfig.inputDate = this.selectedDate.date ? moment(this.selectedDate.date, objConfig.dateFormat).toDate() : new Date();
+
+    objConfig.btnCloseSetInReverse = config.btnCloseSetInReverse ? config.btnCloseSetInReverse : false;
+
+    objConfig.btnProperties = {};
+    if (config.btnProperties) {
+      const btnProperties = config.btnProperties;
+
+      objConfig.btnProperties.expand = btnProperties.expand ? btnProperties.expand : 'block';
+      objConfig.btnProperties.fill = btnProperties.fill ? btnProperties.fill : 'solid';
+      objConfig.btnProperties.size = btnProperties.size ? btnProperties.size : 'default';
+      objConfig.btnProperties.color = btnProperties.color ? btnProperties.color : '';
+      objConfig.btnProperties.disabled = btnProperties.disabled ? btnProperties.disabled : false;
+      objConfig.btnProperties.strong = btnProperties.strong ? btnProperties.strong : false;
+    } else {
+      objConfig.btnProperties.expand = 'block';
+      objConfig.btnProperties.fill = 'solid';
+      objConfig.btnProperties.size = 'default';
+      objConfig.btnProperties.disabled = false;
+      objConfig.btnProperties.strong = false;
+    }
+    // console.log('config =>', objConfig);
+    return objConfig;
+  }
+
+  // Format date
   formatDate() {
     // console.log('formatDate: ', this.selctedDateEpoch, new Date(this.selctedDateEpoch));
-    // console.log('this.mainObj.dateFormat: ', this.mainObj.dateFormat);
-    // console.log('with moment ', moment(this.selctedDateEpoch), moment(this.selctedDateEpoch).format(this.mainObj.dateFormat));
-    // moment.locale(this.momentLocale);
     return moment(this.selctedDateEpoch).format(this.mainObj.dateFormat);
-
-    // let dd: any = new Date(this.selctedDateEpoch).getDate();
-    // // tslint:disable-next-line:prefer-const
-    // let yyyy = new Date(this.selctedDateEpoch).getFullYear();
-    // // let mm: any = new Date(this.selctedDateEpoch).getMonth() + 1; // January is 0!
-    // if (dd < 10) {
-    //   dd = '0' + dd;
-    // }
-    // // if (mm < 10) {
-    // //   mm = '0' + mm;
-    // // }
-    // // yyyy-MM-dd
-    // return yyyy + ' ' + this.mainObj.monthsList[new Date(this.selctedDateEpoch).getMonth()] + ' ' + dd;
   }
 }
 

@@ -2,12 +2,10 @@
     input {
         font-size: 16px;
         margin: 6px 0px;
-        // background: #d7d7d7;
         border: 0;
         border-bottom: 1px solid #ccc;
         width: 100%;
         padding: 12px;
-        // border-radius: 4px;
 
         @media (min-width: 768px) {
             font-size: 18px;
@@ -19,15 +17,4 @@
             box-shadow: unset;
         }
     }
-
-    // ion-item {
-    //     --inner-border-width: 0;
-    //     font-size: 16px;
-    //     margin: 6px 0px;
-    //     background: #d7d7d7;
-    //     border: none;
-    //     width: 100%;
-    //     padding: 12px;
-    //     border-radius: 4px;
-    // }
 }
