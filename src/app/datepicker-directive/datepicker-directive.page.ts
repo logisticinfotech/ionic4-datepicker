@@ -62,7 +62,12 @@ export class DatepickerDirectivePage implements OnInit {
         strong: '', // boolean (default false)
         color: ''
         // "primary", "secondary", "tertiary", "success", "warning", "danger", "light", "medium", "dark" , and give color in string
-      }
+      },
+
+      arrowNextPrev: {
+        // nextArrowSrc: 'assets/images/arrow_right.svg',
+        // prevArrowSrc: 'assets/images/arrow_left.svg'
+      } // This object supports only SVG files.
     };
   }
 }

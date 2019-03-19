@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, HostListener, Output, EventEmitter, forwardRef, ElementRef, Renderer } from '@angular/core';
+import { Directive, Input, OnInit, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component';
 import { NgModel, NgControl } from '@angular/forms';
@@ -25,7 +25,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
     public ngModel: NgModel,
     public control: NgControl,
     public el: ElementRef,
-    public renderer: Renderer,
+    public renderer2: Renderer2,
   ) { }
 
   ngOnInit() {
@@ -45,7 +45,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
         this.closeIcon.style.bottom = '12px';
       }
       this.el.nativeElement.parentNode.appendChild(this.closeIcon);
-      this.renderer.listen(this.closeIcon, 'click', (event) => {
+      this.renderer2.listen(this.closeIcon, 'click', (event) => {
         // Do something with 'event'
         // console.log('button clicks');
         this.selectedDate.date = new Date();
@@ -84,16 +84,16 @@ export class LiIonic4DatepickerDirective implements OnInit {
     }
   }
 
-  @HostListener('click')
-  onClick() {
-    // console.log('on click of component =>', this.inputDateConfig);
-    if (!this.isModalOpen) {
-      this.isModalOpen = true;
-      this.openDatePicker();
-    }
-  }
+  // @HostListener('click')
+  // onClick() {
+  //   // console.log('on click of component =>', this.inputDateConfig);
+  //   if (!this.isModalOpen) {
+  //     this.isModalOpen = true;
+  //     this.openDatePicker();
+  //   }
+  // }
 
-  @HostListener('focus')
+  @HostListener('ionFocus')
   onFocus() {
     // console.log('on focus of component =>', this.inputDateConfig);
     if (!this.isModalOpen) {

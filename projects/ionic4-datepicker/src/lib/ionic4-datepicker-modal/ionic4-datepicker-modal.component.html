@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar (click)="changeToDateList()">
     <ion-title>
       <h1 *ngIf="mainObj?.titleLabel">{{mainObj?.titleLabel}}</h1>
       {{selectedDateString}}
@@ -7,49 +7,46 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content no-padding scrollX="false" scrollY="false" class="ionic_datepicker_modal_content">
 
-<ion-content no-padding class="ionic_datepicker_modal_content">
-
-  <ion-grid class="dp-month-year-container">
+  <ion-grid class="dp-month-year-container" no-padding [ngClass]="isMonthYearSelectorOpen ? 'dp-virual-scroller-hide' : 'dp-virual-scroller-show'">
     <ion-row>
       <ion-col size="1.5" class="dp-left-right-arrow" (click)="prevMonth()">
         <ion-button [ngClass]="{'pointer_events_none':((firstDayEpoch - 86400000) < fromDate)}">
-          <ion-icon name="arrow-back"></ion-icon>
+          <ion-icon *ngIf="!mainObj?.arrowNextPrev?.prevArrowSrc" name="arrow-back"></ion-icon>
+          <ion-icon *ngIf="mainObj?.arrowNextPrev?.prevArrowSrc" src="{{mainObj?.arrowNextPrev?.prevArrowSrc}}"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col size="9">
         <ion-grid>
           <ion-row>
-            <ion-col size="5.5" no-padding>
-              <select class="dp-select" (change)="monthChanged($event)">
-                <option *ngFor="let month of mainObj?.monthsList;" [selected]="data.currentMonth == month" value="{{month}}">
-                  {{month}}
-                </option>
-              </select>
-              <ion-icon name="md-arrow-dropdown" class="dp-down-arrow"></ion-icon>
+            <ion-col class="dp-select-month-year" size="5.5" no-padding (click)="selectMonthYear(true)">
+              <ion-button class="dp-buttons">
+                {{ data.currentMonth }}
+                <ion-icon name="md-arrow-dropdown" class="dp-down-arrow"></ion-icon>
+              </ion-button>
             </ion-col>
             <ion-col size="1"></ion-col>
-            <ion-col size="5.5" no-padding>
-              <select class="dp-select" (change)="yearChanged($event)">
-                <option *ngFor="let year of yearsList;" [selected]="data.currentYear == year" value="{{year}}">
-                  {{year}}
-                </option>
-              </select>
-              <ion-icon name="md-arrow-dropdown" class="dp-down-arrow"></ion-icon>
+            <ion-col class="dp-select-month-year" size="5.5" no-padding (click)="selectMonthYear(false)">
+              <ion-button class="dp-buttons">
+                {{ data.currentYear }}
+                <ion-icon name="md-arrow-dropdown" class="dp-down-arrow"></ion-icon>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-col>
       <ion-col size="1.5" class="dp-left-right-arrow" (click)="nextMonth()">
         <ion-button [ngClass]="{'pointer_events_none':((lastDayEpoch + 86400000)> toDate)}">
-          <ion-icon name="arrow-forward"></ion-icon>
+          <ion-icon *ngIf="!mainObj?.arrowNextPrev?.nextArrowSrc" name="arrow-forward"></ion-icon>
+          <ion-icon *ngIf="mainObj?.arrowNextPrev?.nextArrowSrc" src="{{mainObj?.arrowNextPrev?.nextArrowSrc}}"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-grid class="dp-weeks-container" *ngIf="daysList">
-    <ion-row class="dp-weeks-name">
+  <ion-grid class="dp-weeks-container" *ngIf="daysList" [ngClass]="isMonthYearSelectorOpen ? 'dp-virual-scroller-hide' : 'dp-virual-scroller-show'">
+    <ion-row class=" dp-weeks-name">
       <ion-col *ngFor="let weekName of mainObj?.weeksList;">
         <div class="weeks">{{weekName}}</div>
       </ion-col>
@@ -63,8 +60,13 @@
     </ion-row>
   </ion-grid>
 
-</ion-content>
+  <ion-list class="dp-month-year-scroll-container" [ngClass]="isMonthYearSelectorOpen ? 'dp-virual-scroller-show' : 'dp-virual-scroller-hide'">
+    <ion-item *ngFor="let monthYear of scrollingMonthOrYearArray;let i=index;" id="{{i +'list'}}" (click)="onChangeMonthYear(monthYear)">
+      <ion-label [ngClass]="selectedYearOrMonth === monthYear ? 'dp-selected' : ''">{{ monthYear }}</ion-label>
+    </ion-item>
+  </ion-list>
 
+</ion-content>
 
 <ion-footer>
   <ion-toolbar>

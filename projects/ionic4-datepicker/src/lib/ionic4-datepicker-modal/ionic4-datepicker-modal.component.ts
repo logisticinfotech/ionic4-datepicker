@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavParams, ModalController, IonContent } from '@ionic/angular';
 
 import * as moment_ from 'moment';
 const moment = moment_;
@@ -10,6 +10,8 @@ const moment = moment_;
   styleUrls: ['./ionic4-datepicker-modal.component.scss']
 })
 export class Ionic4DatepickerModalComponent implements OnInit {
+
+  @ViewChild(IonContent) content: IonContent;
 
   currentDate;
   today;
@@ -41,10 +43,14 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   yearsList = [];
   daysList = [];
   yearInAscending = false;
-
   momentLocale = 'en-US';
-
   selectedDateString;
+
+  // month year scroll variables
+  isMonthYearSelectorOpen = false;
+  selectedYearOrMonth;
+  isMonthSelect;
+  scrollingMonthOrYearArray: any = [];
 
   constructor(
     private navParams: NavParams,
@@ -56,7 +62,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
       this.selectedDate.date = this.navParams.get('selectedDate');
     }
     this.mainObj = this.initDatePickerObj(this.navParams.get('objConfig'));
-    // console.log('Main Object =>', this.mainObj, this.selectedDate.date);
   }
 
   ngOnInit() {
@@ -72,15 +77,92 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     return currentDate;
   }
 
+  // this method change month or year list to dateList
+  changeToDateList() {
+    console.log('changeToDateList');
+    this.isMonthYearSelectorOpen = false;
+  }
+
+  // Virtual scroll create for select year and month
+  selectMonthYear(isMonthSelect) {
+    // console.log('selectMonthYear', i);
+    this.isMonthYearSelectorOpen = true;
+
+    this.isMonthSelect = isMonthSelect;
+    this.scrollingMonthOrYearArray = isMonthSelect ? this.mainObj.monthsList : this.yearsList;
+    this.selectedYearOrMonth = isMonthSelect ? this.data.currentMonth : this.data.currentYear;
+
+    const index = this.scrollingMonthOrYearArray.indexOf(this.selectedYearOrMonth);
+    const iditem = index + 'list';
+
+    setTimeout(() => {
+      document.getElementById(iditem).scrollIntoView();
+    }, 100);
+  }
+
+  // select month or year
+  onChangeMonthYear(monthYear) {
+    console.log('onChangeMonthYear', monthYear);
+    if (monthYear) {
+      if (this.isMonthSelect) {
+        this.data.currentMonth = monthYear;
+        this.selectedYearOrMonth = this.data.currentMonth;
+        const monthNumber = this.monthsList.indexOf(this.data.currentMonth);
+        this.currentDate.setDate(1);
+        this.currentDate.setMonth(monthNumber);
+      } else {
+        this.data.currentYear = monthYear;
+        this.selectedYearOrMonth = this.data.currentYear;
+        this.currentDate.setFullYear(this.data.currentYear);
+        this.refreshDateList(this.currentDate);
+      }
+      this.refreshDateList(this.currentDate);
+    }
+    this.isMonthYearSelectorOpen = false;
+
+  }
+
+  // // Month changed
+  // monthChanged(event) {
+  //   // console.log('monthChanged =>', event);
+  //   if (event && event.target && event.target.value) {
+  //     this.data.currentMonth = event.target.value;
+  //   }
+  //   const monthNumber = this.monthsList.indexOf(this.data.currentMonth);
+  //   // console.log('monthChanged monthNumber : ' + monthNumber + ' event.target.value : ' + event.target.value);
+  //   // console.log('currentDate before ', this.currentDate);
+  //   this.currentDate.setDate(1);
+  //   this.currentDate.setMonth(monthNumber);
+  //   // console.log('currentDate after ', this.currentDate);
+  //   this.refreshDateList(this.currentDate);
+  //   // this.changeDaySelected();
+  // }
+
+  // // Year changed
+  // yearChanged(event) {
+  //   // console.log('yearChanged =>', event);
+  //   if (event && event.target && event.target.value) {
+  //     this.data.currentYear = event.target.value;
+  //   }
+  //   this.currentDate.setFullYear(this.data.currentYear);
+  //   this.refreshDateList(this.currentDate);
+  //   // this.changeDaySelected();
+  // }
+
   // Previous month
   prevMonth() {
     // console.log('prevNext', this.currentDate);
-    if (this.currentDate.getMonth() === 1) {
-      this.currentDate.setFullYear(this.currentDate.getFullYear());
+    const currentMonth = this.currentDate.getMonth();
+    const currentYear = this.currentDate.getFullYear();
+    if (currentYear <= this.yearsList[(this.yearsList.length - 1)] && currentMonth === 0) {
+      return;
     }
-    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-    this.data.currentMonth = this.mainObj.monthsList[this.currentDate.getMonth()];
-    this.data.currentYear = this.currentDate.getFullYear();
+    if (currentMonth === 1) {
+      this.currentDate.setFullYear(currentYear);
+    }
+    this.currentDate.setMonth(currentMonth - 1);
+    this.data.currentMonth = this.mainObj.monthsList[currentMonth];
+    this.data.currentYear = currentYear;
     this.refreshDateList(this.currentDate);
     // this.changeDaySelected();
   }
@@ -88,14 +170,18 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   // Next month
   nextMonth() {
     // console.log('nextNext', this.currentDate);
-    if (this.currentDate.getMonth() === 11) {
-      this.currentDate.setFullYear(this.currentDate.getFullYear());
+    const currentMonth = this.currentDate.getMonth();
+    const currentYear = this.currentDate.getFullYear();
+    if (currentYear >= this.yearsList[0] && currentMonth === 11) {
+      return;
+    }
+    if (currentMonth === 11) {
+      this.currentDate.setFullYear(currentYear);
     }
     this.currentDate.setDate(1);
-    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-    this.data.currentMonth = this.mainObj.monthsList[this.currentDate.getMonth()];
-    this.data.currentYear = this.currentDate.getFullYear();
-    this.monthChanged(this.currentDate.getMonth());
+    this.currentDate.setMonth(currentMonth + 1);
+    this.data.currentMonth = this.mainObj.monthsList[currentMonth];
+    this.data.currentYear = currentYear;
     this.refreshDateList(this.currentDate);
     // this.changeDaySelected();
   }
@@ -106,7 +192,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     const newSelectedDate: any = new Date(this.selctedDateEpoch);
     newSelectedDate.setMonth(this.currentDate.getMonth());
     newSelectedDate.setYear(this.currentDate.getFullYear());
-
     this.selctedDateEpoch = newSelectedDate.getTime();
     this.selectedDateString = this.formatDate();
     // this.closeModal(this.selctedDateEpoch);
@@ -167,9 +252,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   // Refresh the list of the dates of a month
   refreshDateList(currentDate) {
     // console.log('refreshDateList =>', currentDate);
-    // console.log('currentDate before ', this.currentDate);
     currentDate = this.resetHMSM(currentDate);
-    // console.log('currentDate after ', currentDate);
     this.currentDate = currentDate;
 
     const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDate();
@@ -183,6 +266,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     }
 
     this.yearsList = this.getYearsList(this.mainObj.from, this.mainObj.to);
+
     this.daysList = [];
     let tempDate, disabled;
     this.firstDayEpoch = this.resetHMSM(new Date(currentDate.getFullYear(), currentDate.getMonth(), firstDay)).getTime();
@@ -228,47 +312,16 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     // To set Monday as the first day of the week.
     let firstDayMonday = this.daysList[0].day - this.mainObj.mondayFirst;
     firstDayMonday = (firstDayMonday < 0) ? 6 : firstDayMonday;
-
     for (let j = 0; j < firstDayMonday; j++) {
       this.daysList.unshift({});
     }
-
     this.rows = [0, 7, 14, 21, 28, 35];
     this.cols = [0, 1, 2, 3, 4, 5, 6];
-
     this.data.currentMonth = this.mainObj.monthsList[currentDate.getMonth()];
-    // console.log('currentDate.getMonth() ' + currentDate.getMonth());
     this.data.currentYear = currentDate.getFullYear();
     this.data.currentMonthSelected = this.data.currentMonth;
     this.currentYearSelected = this.data.currentYear;
     this.numColumns = 7;
-  }
-
-  // Month changed
-  monthChanged(event) {
-    // console.log('monthChanged =>', event);
-    if (event && event.target && event.target.value) {
-      this.data.currentMonth = event.target.value;
-    }
-    const monthNumber = this.monthsList.indexOf(this.data.currentMonth);
-    // console.log('monthChanged monthNumber : ' + monthNumber + ' event.target.value : ' + event.target.value);
-    // console.log('currentDate before ', this.currentDate);
-    this.currentDate.setDate(1);
-    this.currentDate.setMonth(monthNumber);
-    // console.log('currentDate after ', this.currentDate);
-    this.refreshDateList(this.currentDate);
-    // this.changeDaySelected();
-  }
-
-  // Year changed
-  yearChanged(event) {
-    // console.log('yearChanged =>', event);
-    if (event && event.target && event.target.value) {
-      this.data.currentYear = event.target.value;
-    }
-    this.currentDate.setFullYear(this.data.currentYear);
-    this.refreshDateList(this.currentDate);
-    // this.changeDaySelected();
   }
 
   // Setting up the initial object
@@ -289,11 +342,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     if (this.mainObj.momentLocale) {
       this.momentLocale = this.mainObj.momentLocale;
     }
-
     this.disableWeekdays = this.mainObj.disableWeekDays;
     this.setDisabledDates(this.mainObj);
-
-    // console.log('INPUT DATE =>' , this.mainObj.inputDate);
     this.refreshDateList(this.mainObj.inputDate);
   }
 
@@ -301,7 +351,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   closeModal(selectedDate) {
     // console.log('closeModal => ', selectedDate);
     this.modalCtrl.getTop();
-    // this.selectedDate.date = selectedDate;
     const formattedDate = moment(selectedDate).format(this.mainObj.dateFormat);
     this.modalCtrl.dismiss({ 'date': formattedDate });
   }
@@ -393,7 +442,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     objConfig.btnProperties = {};
     if (config.btnProperties) {
       const btnProperties = config.btnProperties;
-
       objConfig.btnProperties.expand = btnProperties.expand ? btnProperties.expand : 'block';
       objConfig.btnProperties.fill = btnProperties.fill ? btnProperties.fill : 'solid';
       objConfig.btnProperties.size = btnProperties.size ? btnProperties.size : 'default';
@@ -407,6 +455,14 @@ export class Ionic4DatepickerModalComponent implements OnInit {
       objConfig.btnProperties.disabled = false;
       objConfig.btnProperties.strong = false;
     }
+
+    objConfig.arrowNextPrev = {};
+    if (config.arrowNextPrev) {
+      const arrowNextPrev = config.arrowNextPrev;
+      objConfig.arrowNextPrev.nextArrowSrc = arrowNextPrev.nextArrowSrc ? arrowNextPrev.nextArrowSrc : false;
+      objConfig.arrowNextPrev.prevArrowSrc = arrowNextPrev.prevArrowSrc ? arrowNextPrev.prevArrowSrc : false;
+    }
+
     // console.log('config =>', objConfig);
     return objConfig;
   }

@@ -12,8 +12,9 @@
 
 .li-ionic4-datePicker {
     .modal-wrapper {
-        height: 75%;
-        max-height: 478px;
+        // height: 75%;
+        height: 450px;
+        max-height: 450px;
         width: 312px;
         border-radius: 0px;
         --ion-color-primary: red; // This Variable used for the change of colour ion-datepicker only.
@@ -26,9 +27,9 @@
             // button customization css write here...
         }
 
-        @media (min-width: 768px) {
-            width: 350px;
-            height: 65%;
-        }
+        // @media (min-width: 768px) {
+        //     width: 350px;
+        //     height: 65%;
+        // }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Input, ElementRef, Renderer, Renderer2 } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, ElementRef, Renderer2 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgModel } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4-datepicker-modal.component';
@@ -36,7 +36,7 @@ export class Ionic4DatepickerComponent implements OnInit, ControlValueAccessor {
   constructor(
     private modalCtrl: ModalController,
     public el: ElementRef,
-    public renderer: Renderer
+    public renderer2: Renderer2
   ) { }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class Ionic4DatepickerComponent implements OnInit, ControlValueAccessor {
       this.el.nativeElement.setAttribute('style', 'position: relative; width: 100%;');
       this.el.nativeElement.appendChild(this.closeIcon);
 
-      this.renderer.listen(this.closeIcon, 'click', (event) => {
+      this.renderer2.listen(this.closeIcon, 'click', (event) => {
         // Do something with 'event'
         // console.log('button clicks');
         this.selectedDate = new Date();

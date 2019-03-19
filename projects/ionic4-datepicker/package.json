@@ -1,8 +1,8 @@
 {
   "name": "@logisticinfotech/ionic4-datepicker",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "ionic4-datepicker inspired by rajeshwar patlolla ionic1 datepicker",
-  "keywords" :["Angular","Library", "Ionic4", "Datepicker"],
+  "keywords" :["Ionic-datepicker", "ionic", "ionic datepicker", "datepicker", "datepicker ionic", "datepicker for ionic", "datepicker for ionic framework"],
   "license" : "SEE LICENSE IN LICENSE",
   "repository": {
     "type" : "git",
@@ -10,8 +10,8 @@
   },
   "homepage" :"https://logisticinfotech.com/blog/ionic4-datepicker-component",
   "peerDependencies": {
-    "@angular/common": "^7.1.0",
-    "@angular/core": "^7.1.0",
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
     "moment": "^2.24.0"
   }
 }

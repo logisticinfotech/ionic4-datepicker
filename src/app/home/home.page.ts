@@ -64,7 +64,7 @@ export class HomePage implements OnInit {
       // monthsList: this.monthsList,
       // weeksList: this.weeksList,
       momentLocale: 'pt-BR',
-      yearInAscending: true
+      yearInAscending: false
     };
 
     this.datePickerObjPtBr = {

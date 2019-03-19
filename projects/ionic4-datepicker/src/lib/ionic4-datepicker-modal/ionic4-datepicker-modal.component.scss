@@ -3,7 +3,7 @@
         height: 60px;
 
         ion-toolbar {
-            --background: var(--ion-color-primary) !important;
+            --background: var(--ion-color-primary);
             height: 100%;
             align-items: center;
             display: flex;
@@ -18,7 +18,7 @@
                 align-items: center;
                 justify-content: center;
                 height: 100%;
-
+                cursor: pointer;
                 h1 {
                     font-size: 14px;
                     margin: 0;
@@ -30,7 +30,8 @@
 
     .ionic_datepicker_modal_content {
         .dp-month-year-container {
-            height: 15%;
+            // height: 15%;
+            // opacity: 1;
 
             ion-col {
                 display: flex;
@@ -40,55 +41,58 @@
                 ion-grid {
                     width: 100%;
 
-                    .dp-select {
-                        padding: 8px 4px;
-                        width: 100%;
-                        border: 0;
-                        border-radius: 0;
-                        border-bottom: 1.5px solid !important;
-                        border-bottom-color: var(--ion-color-primary) !important;
-                        background: transparent;
-                        position: relative;
-                        text-align: center;
-                        text-align-last: center;
-                        z-index: 1;
-                        -webkit-appearance: none;
+                    .dp-select-month-year {
+                        border-bottom: 1.5px solid;
+                        border-bottom-color: var(--ion-color-primary);
 
-                        &:focus {
-                            outline: none;
+                        .dp-buttons {
+                            width: 100%;
+                            height: 40px;
+                            margin: 0;
+                            padding: 0;
+                            color: var(--ion-color-primary);
+                            --background: transparent;
+                            --box-shadow: none;
+
+                            &.activated {
+                                --background-activated: transparent;
+                                --color-activated: var(--ion-color-primary);
+                            }
                         }
-                    }
 
-                    .dp-down-arrow {
-                        position: absolute;
-                        width: 20%;
-                        right: 0;
-                        height: 45%;
-                        color: var(--ion-color-primary) !important;
+                        .dp-down-arrow {
+                            position: absolute;
+                            width: 16px;
+                            right: 0px;
+                            top: 10px;
+                            color: var(--ion-color-primary);
+                        }
                     }
                 }
             }
 
             .dp-left-right-arrow {
                 ion-button {
-                    --background: transparent !important;
-                    --box-shadow: 0 !important;
-                    color: var(--ion-color-primary) !important;
+                    --background: transparent;
+                    --box-shadow: 0;
+                    color: var(--ion-color-primary);
 
                     &:focus {
                         outline: none;
                     }
 
                     &.activated {
-                        --ion-color-primary-shade: transparent !important;
-                        --ion-color-primary-contrast: var(--ion-color-primary-tint) !important;
+                        --ion-color-primary-shade: transparent;
+                        --ion-color-primary-contrast: var(--ion-color-primary-tint);
                     }
                 }
             }
         }
 
         .dp-weeks-container {
-            margin: 15px 0;
+            // margin: 8px 0px 15px 0;
+            margin: 8px 0;
+            // opacity: 1;
 
             .dp-weeks-name {
                 ion-col {
@@ -121,17 +125,47 @@
         }
 
         .dp-selecteddate {
-            background: var(--ion-color-primary) !important;
-            color: var(--ion-color-primary-contrast) !important;
+            background: var(--ion-color-primary);
+            color: var(--ion-color-primary-contrast);
             border-radius: 4px;
-            font-weight: 500 !important;
+            font-weight: 500;
         }
 
         .dp-today {
             border-radius: 4px;
-            font-weight: 500 !important;
-            border: 1px solid !important;
-            border-color: var(--ion-color-primary) !important;
+            font-weight: 500;
+            border: 1px solid;
+            border-color: var(--ion-color-primary);
+        }
+
+        .dp-month-year-scroll-container {
+            // opacity: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            overflow-y: scroll;
+
+            ion-item {
+                --padding-start: 0;
+                --inner-padding-end: 0;
+                --inner-border-width: 0;
+
+                ion-label {
+                    text-align: center;
+                    margin: 0;
+                    font-size: 16px;
+                }
+                ion-label.dp-selected {
+                    color: var(--ion-color-primary);
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+
+
         }
     }
 
@@ -139,11 +173,32 @@
         color: #AAAAAA;
     }
 
+    .dp-virual-scroller-show {
+        -webkit-transition: opacity 0.3s ease-in;
+        -moz-transition: opacity 0.3s ease-in;
+        -ms-transition: opacity 0.3s ease-in;
+        -o-transition: opacity 0.3s ease-in;
+        transition: opacity 0.3s ease-in;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .dp-virual-scroller-hide {
+        // -webkit-transition: opacity 0.3s linear;
+        // -moz-transition: opacity 0.3s linear;
+        // -ms-transition: opacity 0.3s linear;
+        // -o-transition: opacity 0.3s linear;
+        // transition: opacity 0.3s linear;
+        opacity: 0;
+        visibility: hidden;
+        height: auto;
+    }
+
     ion-footer {
-        height: 55px !important;
+        height: 55px;
 
         ion-toolbar {
-            height: 100% !important;
+            height: 100%;
             --border-width: 0;
             --padding-top: 0px;
             --padding-bottom: 0px;
@@ -151,33 +206,16 @@
             --padding-end: 0px;
 
             .toolbar-container {
-                height: 100% !important;
+                height: 100%;
             }
 
-            ion-grid {
-                height: -webkit-fill-available !important;
-
-                ion-row {
-                    height: -webkit-fill-available !important;
-
-                    ion-col {
-                        height: -webkit-fill-available !important;
-                    }
-                }
-
-                .dp-btn-set-close-in-reverse {
-                    flex-direction: row-reverse;
-                }
+            .dp-btn-set-close-in-reverse {
+                flex-direction: row-reverse;
             }
 
             ion-button {
-                // --background: var(--ion-color-primary) !important;
                 --border-radius: 0;
-                // width: 100%;
                 height: 55px;
-                // font-size: 16px;
-                // font-weight: 500 !important;
-                // color: var(--ion-color-primary-contrast) !important;
                 margin: 0;
 
                 &:focus {
@@ -185,8 +223,8 @@
                 }
 
                 &.activated {
-                    --background-activated: var(--ion-color-primary-tint) !important;
-                    --color-activated: var(--ion-color-primary-contrast) !important;
+                    --background-activated: var(--ion-color-primary-tint);
+                    --color-activated: var(--ion-color-primary-contrast);
                 }
             }
         }
