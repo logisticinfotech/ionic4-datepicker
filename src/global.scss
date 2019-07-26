@@ -12,9 +12,8 @@
 
 .li-ionic4-datePicker {
     .modal-wrapper {
-        // height: 75%;
-        height: 450px;
-        max-height: 450px;
+        height: 460px;
+        max-height: 460px;
         width: 312px;
         border-radius: 0px;
         --ion-color-primary: red; // This Variable used for the change of colour ion-datepicker only.
@@ -33,3 +32,8 @@
         // }
     }
 }
+
+// If you can use li-datepicket component then you can give CSS/SCSS in this class for input.
+// .li-dp-input {
+//     background-color: red;
+// }

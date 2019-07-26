@@ -52,9 +52,12 @@
       </ion-col>
     </ion-row>
     <ion-row *ngFor="let row of rows;" class="dp-days-list">
-      <ion-col *ngFor="let col of cols; let i = index ;" (click)="dateSelected(daysList[row + i])" no-padding [ngClass]="{'dp-selecteddate': (daysList[row + i]?.epoch === selctedDateEpoch),
-                                'dp-today' : (daysList[row + i]?.epoch == today),
-                                'disabled' : (daysList[row + i]?.disabled)}">
+      <ion-col *ngFor="let col of cols; let i = index ;" (click)="dateSelected(daysList[row + i])"
+        [style.background-color]="(daysList[row + i]?.color) ? (daysList[row + i]?.color) : ''"
+        [style.border-radius]="(daysList[row + i]?.color) ? '4px' : ''" no-padding [ngClass]="{
+          'dp-selecteddate': (daysList[row + i]?.epoch === selctedDateEpoch),
+          'dp-today' : (daysList[row + i]?.epoch == today),
+          'disabled' : (daysList[row + i]?.disabled)}">
         <div class="days">{{daysList[row + col]?.date}}</div>
       </ion-col>
     </ion-row>

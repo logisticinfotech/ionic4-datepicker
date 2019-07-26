@@ -24,7 +24,10 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   selctedDateEpoch;
   firstDayEpoch;
   lastDayEpoch;
+
   disabledDates = [];
+  highlightedDates = {};
+
   fromDate;
   toDate;
   disableWeekdays = [];
@@ -79,7 +82,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   // this method change month or year list to dateList
   changeToDateList() {
-    console.log('changeToDateList');
+    // console.log('changeToDateList');
     this.isMonthYearSelectorOpen = false;
   }
 
@@ -102,7 +105,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   // select month or year
   onChangeMonthYear(monthYear) {
-    console.log('onChangeMonthYear', monthYear);
+    // console.log('onChangeMonthYear', monthYear);
     if (monthYear) {
       if (this.isMonthSelect) {
         this.data.currentMonth = monthYear;
@@ -121,33 +124,6 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     this.isMonthYearSelectorOpen = false;
 
   }
-
-  // // Month changed
-  // monthChanged(event) {
-  //   // console.log('monthChanged =>', event);
-  //   if (event && event.target && event.target.value) {
-  //     this.data.currentMonth = event.target.value;
-  //   }
-  //   const monthNumber = this.monthsList.indexOf(this.data.currentMonth);
-  //   // console.log('monthChanged monthNumber : ' + monthNumber + ' event.target.value : ' + event.target.value);
-  //   // console.log('currentDate before ', this.currentDate);
-  //   this.currentDate.setDate(1);
-  //   this.currentDate.setMonth(monthNumber);
-  //   // console.log('currentDate after ', this.currentDate);
-  //   this.refreshDateList(this.currentDate);
-  //   // this.changeDaySelected();
-  // }
-
-  // // Year changed
-  // yearChanged(event) {
-  //   // console.log('yearChanged =>', event);
-  //   if (event && event.target && event.target.value) {
-  //     this.data.currentYear = event.target.value;
-  //   }
-  //   this.currentDate.setFullYear(this.data.currentYear);
-  //   this.refreshDateList(this.currentDate);
-  //   // this.changeDaySelected();
-  // }
 
   // Previous month
   prevMonth() {
@@ -249,6 +225,21 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     }
   }
 
+  // Set hightlighted dates
+  setHightlightedDates(obj) {
+    if (!obj.highlightedDates || obj.highlightedDates.length === 0) {
+      this.highlightedDates = {};
+    } else {
+      this.highlightedDates = {};
+      for (let i = 0; i < obj.highlightedDates.length; i++) {
+        const hDate = obj.highlightedDates[i].date;
+        const hColor = obj.highlightedDates[i].color;
+        const hDateTime = this.resetHMSM(new Date(hDate)).getTime();
+        this.highlightedDates[hDateTime] = hColor;
+      }
+    }
+  }
+
   // Refresh the list of the dates of a month
   refreshDateList(currentDate) {
     // console.log('refreshDateList =>', currentDate);
@@ -305,7 +296,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
         year: tempDate.getFullYear(),
         day: tempDate.getDay(),
         epoch: tempDate.getTime(),
-        disabled: disabled
+        disabled: disabled,
+        color: this.highlightedDates[tempDate.getTime()]
       });
     }
 
@@ -463,6 +455,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
       objConfig.arrowNextPrev.prevArrowSrc = arrowNextPrev.prevArrowSrc ? arrowNextPrev.prevArrowSrc : false;
     }
 
+    objConfig.highlightedDates = [];
+    if (config.highlightedDates && config.highlightedDates.length > 0) {
+      objConfig.highlightedDates = config.highlightedDates;
+
+      this.setHightlightedDates(objConfig);
+    }
     // console.log('config =>', objConfig);
     return objConfig;
   }

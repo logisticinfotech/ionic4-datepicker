@@ -6,9 +6,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class DatepickerDirectivePage implements OnInit {
 
-  mydate1;
+  // mydate1;
   mydate2 = '';
-  // mydate1 = '11 Dec 2018';
+  mydate1 = '24 Aug 2019';
   // mydate2 = '12 Dec 2018';
   datePickerObj: any = {};
 
@@ -53,7 +53,6 @@ export class DatepickerDirectivePage implements OnInit {
       // momentLocale: 'pt-BR',
       // yearInAscending: true,
       // btnCloseSetInReverse: false,
-
       btnProperties: {
         expand: 'block', // "block" | "full"
         fill: '', // "clear" | "default" | "outline" | "solid"
@@ -67,7 +66,16 @@ export class DatepickerDirectivePage implements OnInit {
       arrowNextPrev: {
         // nextArrowSrc: 'assets/images/arrow_right.svg',
         // prevArrowSrc: 'assets/images/arrow_left.svg'
-      } // This object supports only SVG files.
+      }, // This object supports only SVG files.
+
+      highlightedDates: [
+        { date: new Date('2019-08-10'), color: '#ee88bf' },
+        { date: new Date('2019-08-12'), color: '#50f2b1' },
+        { date: new Date('2019-08-14'), color: '#f2ef50' },
+        { date: new Date('2019-08-16'), color: '#ee99bf' },
+        { date: new Date('2019-08-18'), color: '#5000b1' },
+        { date: new Date('2019-08-20'), color: '#f21250' },
+      ]
     };
   }
 }
