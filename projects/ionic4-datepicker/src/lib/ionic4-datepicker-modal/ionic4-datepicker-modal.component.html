@@ -90,8 +90,10 @@
           </ion-button>
         </ion-col>
         <ion-col no-padding *ngIf="!mainObj?.closeOnSelect">
-          <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}" fill="{{mainObj?.btnProperties?.fill}}"
-            size="{{mainObj?.btnProperties?.size}}" color="{{mainObj?.btnProperties?.color}}" disabled="{{mainObj?.btnProperties?.disabled}}"
+          <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}"
+            fill="{{mainObj?.btnProperties?.fill}}" size="{{mainObj?.btnProperties?.size}}"
+            color="{{mainObj?.btnProperties?.color}}"
+            disabled="{{mainObj?.btnProperties?.disabled || !isSelectedDateFound}}"
             strong="{{mainObj?.btnProperties?.strong}}" (click)="setIonicDatePickerDate()">
             {{mainObj?.setLabel}}
           </ion-button>

@@ -21,7 +21,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   selectedDate: any = {};
 
   // component variables
-  selctedDateEpoch;
+  selctedDateEpoch = 0;
   firstDayEpoch;
   lastDayEpoch;
 
@@ -55,6 +55,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   isMonthSelect;
   scrollingMonthOrYearArray: any = [];
 
+  isSelectedDateFound = false;
+
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController
@@ -63,6 +65,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     if (this.navParams.get('selectedDate')) {
       // console.log('Selected date =>', this.navParams.get('selectedDate'));
       this.selectedDate.date = this.navParams.get('selectedDate');
+      this.isSelectedDateFound = true;
     }
     this.mainObj = this.initDatePickerObj(this.navParams.get('objConfig'));
   }
@@ -178,6 +181,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     // console.log('dateSelected =>', selectedDate);
     if (selectedDate && !selectedDate.disabled) {
       if (!selectedDate || Object.keys(selectedDate).length === 0) { return; }
+      this.isSelectedDateFound = true;
       this.selctedDateEpoch = selectedDate.epoch;
       this.selectedDateString = this.formatDate();
       if (this.mainObj.closeOnSelect) {
@@ -320,8 +324,13 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   setInitialObj(ipObj) {
     // console.log('setInitialObj =>', ipObj);
     this.mainObj = ipObj;
-    this.selctedDateEpoch = this.resetHMSM(this.mainObj.inputDate).getTime();
+    if (this.isSelectedDateFound) {
+      this.isSelectedDateFound = true;
+      this.selctedDateEpoch = this.resetHMSM(this.mainObj.inputDate).getTime();
+    }
+
     this.selectedDateString = this.formatDate();
+
     if (this.mainObj.weeksList && this.mainObj.weeksList.length === 7) {
       this.weeksList = this.mainObj.weeksList;
     }

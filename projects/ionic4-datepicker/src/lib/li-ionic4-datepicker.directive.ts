@@ -18,7 +18,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
 
   closeIcon;
   selectedDate: any = {};
-  isModalOpen: any = false;
+  // isModalOpen: any = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -95,12 +95,12 @@ export class LiIonic4DatepickerDirective implements OnInit {
 
   @HostListener('ionFocus')
   onFocus() {
-    // console.log('on focus of component =>', this.inputDateConfig);
-    if (!this.isModalOpen) {
-      this.isModalOpen = true;
-      this.openDatePicker();
-    }
+    // if (!this.isModalOpen) {
+    // this.isModalOpen = true;
+    this.openDatePicker();
+    // }
   }
+
 
   async openDatePicker() {
     // console.log('openDatePicker');
@@ -114,8 +114,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
 
     datePickerModal.onDidDismiss()
       .then((data) => {
-        this.isModalOpen = false;
-        // console.log(data);
+        // this.isModalOpen = false;
         if (data.data && data.data.date && data.data.date !== 'Invalid date') {
           this.selectedDate.date = data.data.date;
           this.control.control.setValue(data.data.date);
