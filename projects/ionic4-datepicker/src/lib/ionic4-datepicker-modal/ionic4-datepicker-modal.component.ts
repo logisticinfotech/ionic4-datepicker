@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NavParams, ModalController, IonContent } from '@ionic/angular';
 
 import * as moment_ from 'moment';
+import { Ionic4DatepickerService } from '../ionic4-datepicker.service';
 const moment = moment_;
 
 @Component({
@@ -9,7 +10,7 @@ const moment = moment_;
   templateUrl: './ionic4-datepicker-modal.component.html',
   styleUrls: ['./ionic4-datepicker-modal.component.scss']
 })
-export class Ionic4DatepickerModalComponent implements OnInit {
+export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
 
   @ViewChild(IonContent) content: IonContent;
 
@@ -26,7 +27,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   lastDayEpoch;
 
   disabledDates = [];
-  highlightedDates = {};
+  highlightedDates: any = {};
 
   fromDate;
   toDate;
@@ -59,7 +60,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
 
   constructor(
     private navParams: NavParams,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public datePickerService: Ionic4DatepickerService
   ) {
     this.today = this.resetHMSM(new Date()).getTime();
     if (this.navParams.get('selectedDate')) {
@@ -71,7 +73,12 @@ export class Ionic4DatepickerModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.datePickerService.isModalOpen = true;
     this.initDatePicker();
+  }
+
+  ngOnDestroy() {
+    this.datePickerService.isModalOpen = false;
   }
 
   // Reset the hours, minutes, seconds and milli seconds
@@ -238,8 +245,9 @@ export class Ionic4DatepickerModalComponent implements OnInit {
       for (let i = 0; i < obj.highlightedDates.length; i++) {
         const hDate = obj.highlightedDates[i].date;
         const hColor = obj.highlightedDates[i].color;
+        const hFontColor = obj.highlightedDates[i].fontColor;
         const hDateTime = this.resetHMSM(new Date(hDate)).getTime();
-        this.highlightedDates[hDateTime] = hColor;
+        this.highlightedDates[hDateTime] = { color: hColor, fontColor: hFontColor };
       }
     }
   }
@@ -294,6 +302,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
           || this.mainObj.disableWeekDays.indexOf(tempDate.getDay()) >= 0;
       }
 
+      const hightLightDate = this.highlightedDates[tempDate.getTime()];
+
       this.daysList.push({
         date: tempDate.getDate(),
         month: tempDate.getMonth(),
@@ -301,7 +311,8 @@ export class Ionic4DatepickerModalComponent implements OnInit {
         day: tempDate.getDay(),
         epoch: tempDate.getTime(),
         disabled: disabled,
-        color: this.highlightedDates[tempDate.getTime()]
+        color: hightLightDate && hightLightDate.color ? hightLightDate.color : null,
+        fontColor: hightLightDate && hightLightDate.fontColor ? hightLightDate.fontColor : null
       });
     }
 
@@ -405,6 +416,7 @@ export class Ionic4DatepickerModalComponent implements OnInit {
     // const config = this.mainObj;
 
     if (config.inputDate && !this.selectedDate.date) {
+      this.isSelectedDateFound = true;
       this.selectedDate.date = config.inputDate;
     }
 

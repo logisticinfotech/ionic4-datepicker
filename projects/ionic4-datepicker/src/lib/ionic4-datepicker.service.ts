@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class Ionic4DatepickerService {
 
+  isModalOpen = false;
+
   constructor() { }
 }

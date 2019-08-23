@@ -33,7 +33,7 @@ export class DatepickerDirectivePage implements OnInit {
       // inputDate: new Date('12'), // If you want to set month in date-picker
       // inputDate: new Date('2018'), // If you want to set year in date-picker
       // inputDate: new Date('2018-12'), // If you want to set year & month in date-picker
-      // inputDate: new Date('2018-12-01'), // If you want to set date in date-picker
+      inputDate: new Date('2018-12-01'), // If you want to set date in date-picker
 
       // fromDate: new Date('2015-12-20'), // need this in order to have toDate
       // toDate: new Date('2019-12-25'),
@@ -69,12 +69,24 @@ export class DatepickerDirectivePage implements OnInit {
       }, // This object supports only SVG files.
 
       highlightedDates: [
-        { date: new Date('2019-08-10'), color: '#ee88bf' },
-        { date: new Date('2019-08-12'), color: '#50f2b1' },
-        { date: new Date('2019-08-14'), color: '#f2ef50' },
-        { date: new Date('2019-08-16'), color: '#ee99bf' },
-        { date: new Date('2019-08-18'), color: '#5000b1' },
-        { date: new Date('2019-08-20'), color: '#f21250' },
+        // { date: new Date('2019-09-10'), color: '#ee88bf', fontColor: '#fff' },
+        // { date: new Date('2019-09-12'), color: '#50f2b1', fontColor: '#fff' },
+        // { date: new Date('2019-09-14'), color: '#f2ef50', fontColor: '#fff' },
+        // { date: new Date('2019-09-16'), color: '#ee99bf', fontColor: '#fff' },
+        // { date: new Date('2019-09-18'), color: '#5000b1', fontColor: '#fff' },
+        // { date: new Date('2019-09-20'), color: '#f21250', fontColor: '#fff' },
+        // { date: new Date('2019-08-10'), color: '#ee88bf', fontColor: '#fff' },
+        // { date: new Date('2019-08-12'), color: '#50f2b1', fontColor: '#fff' },
+        // { date: new Date('2019-08-14'), color: '#f2ef50', fontColor: '#fff' },
+        // { date: new Date('2019-08-16'), color: '#ee99bf', fontColor: '#fff' },
+        // { date: new Date('2019-08-18'), color: '#5000b1', fontColor: '#fff' },
+        // { date: new Date('2019-08-20'), color: '#f21250', fontColor: '#fff' },
+        // { date: new Date('2019-07-10'), color: '#ee88bf', fontColor: '#fff' },
+        // { date: new Date('2019-07-12'), color: '#50f2b1', fontColor: '#fff' },
+        // { date: new Date('2019-07-14'), color: '#f2ef50', fontColor: '#fff' },
+        // { date: new Date('2019-07-16'), color: '#ee99bf', fontColor: '#fff' },
+        // { date: new Date('2019-07-18'), color: '#5000b1', fontColor: '#fff' },
+        // { date: new Date('2019-07-20'), color: '#f21250', fontColor: '#fff' },
       ]
     };
   }

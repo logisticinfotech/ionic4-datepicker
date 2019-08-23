@@ -4,13 +4,12 @@ import { Ionic4DatepickerModalComponent } from './ionic4-datepicker-modal/ionic4
 import { NgModel, NgControl } from '@angular/forms';
 
 import * as moment_ from 'moment';
-
-const moment = moment_;
+import { Ionic4DatepickerService } from './ionic4-datepicker.service';
 
 @Directive({
   selector: '[liIonic4Datepicker]',
   exportAs: 'liIonic4Datepicker',
-  providers: [NgModel]
+  providers: [NgModel],
 })
 export class LiIonic4DatepickerDirective implements OnInit {
 
@@ -18,7 +17,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
 
   closeIcon;
   selectedDate: any = {};
-  // isModalOpen: any = false;
+  isModalOpen: any = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -26,6 +25,7 @@ export class LiIonic4DatepickerDirective implements OnInit {
     public control: NgControl,
     public el: ElementRef,
     public renderer2: Renderer2,
+    public datePickerService: Ionic4DatepickerService
   ) { }
 
   ngOnInit() {
@@ -84,23 +84,13 @@ export class LiIonic4DatepickerDirective implements OnInit {
     }
   }
 
-  // @HostListener('click')
-  // onClick() {
-  //   // console.log('on click of component =>', this.inputDateConfig);
-  //   if (!this.isModalOpen) {
-  //     this.isModalOpen = true;
-  //     this.openDatePicker();
-  //   }
-  // }
-
   @HostListener('ionFocus')
-  onFocus() {
-    // if (!this.isModalOpen) {
-    // this.isModalOpen = true;
+  public onFocus() {
+    if (this.datePickerService.isModalOpen) {
+      return;
+    }
     this.openDatePicker();
-    // }
   }
-
 
   async openDatePicker() {
     // console.log('openDatePicker');
@@ -114,7 +104,6 @@ export class LiIonic4DatepickerDirective implements OnInit {
 
     datePickerModal.onDidDismiss()
       .then((data) => {
-        // this.isModalOpen = false;
         if (data.data && data.data.date && data.data.date !== 'Invalid date') {
           this.selectedDate.date = data.data.date;
           this.control.control.setValue(data.data.date);
