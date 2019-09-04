@@ -67,17 +67,29 @@ export class DatepickerComponentPage implements OnInit {
         // prevArrowSrc: 'assets/images/arrow_left.svg'
       }, // This object supports only SVG files.
 
-      // highlightedDates: [
-      //   { date: new Date('2019-07-10'), color: '#ee17bf' },
-      //   { date: new Date('2019-07-12'), color: '#50f2b1' },
-      //   { date: new Date('2019-07-14'), color: '#f2ef50' },
-      //   { date: new Date('2019-08-10'), color: '#ee17bf' },
-      //   { date: new Date('2019-08-12'), color: '#50f2b1' },
-      //   { date: new Date('2019-08-14'), color: '#f2ef50' },
-      // ]
+      highlightedDates: [
+        { date: new Date('2019-09-10'), color: '#ee88bf' },
+        { date: new Date('2019-09-12'), color: '#50f2b1' },
+        { date: new Date('2019-09-14'), color: '#f2ef50' },
+        { date: new Date('2019-09-16'), color: '#ee99bf' },
+        { date: new Date('2019-09-18'), color: '#5000b1' },
+        { date: new Date('2019-09-20'), color: '#f21250' },
+        { date: new Date('2019-08-10'), color: '#ee88bf' },
+        { date: new Date('2019-08-12'), color: '#50f2b1' },
+        { date: new Date('2019-08-14'), color: '#f2ef50' },
+        { date: new Date('2019-08-16'), color: '#ee99bf' },
+        { date: new Date('2019-08-18'), color: '#5000b1' },
+        { date: new Date('2019-08-20'), color: '#f21250' },
+        { date: new Date('2019-07-10'), color: '#ee88bf' },
+        { date: new Date('2019-07-12'), color: '#50f2b1' },
+        { date: new Date('2019-07-14'), color: '#f2ef50' },
+        { date: new Date('2019-07-16'), color: '#ee99bf' },
+        { date: new Date('2019-07-18'), color: '#5000b1' },
+        { date: new Date('2019-07-20'), color: '#f21250' },
+      ],
+      // isSundayHighlighted: {
+      //   fontColor: 'red'
+      // }
     };
   }
-
-
-
 }

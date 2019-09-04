@@ -84,7 +84,10 @@ export class DatepickerButtonPage implements OnInit {
       //   { date: new Date('2019-08-10'), color: '#ee17bf' },
       //   { date: new Date('2019-08-12'), color: '#50f2b1' },
       //   { date: new Date('2019-08-14'), color: '#f2ef50' },
-      // ]
+      // ],
+      // isSundayHighlighted: {
+      //   fontColor: 'red'
+      // }
     };
   }
 
@@ -92,7 +95,7 @@ export class DatepickerButtonPage implements OnInit {
     const datePickerModal = await this.modalCtrl.create({
       component: Ionic4DatepickerModalComponent,
       cssClass: 'li-ionic4-datePicker',
-      componentProps: { 'objConfig': this.datePickerObj }
+      componentProps: { 'objConfig': this.datePickerObj, 'selectedDate': this.selectedDate }
     });
     await datePickerModal.present();
 

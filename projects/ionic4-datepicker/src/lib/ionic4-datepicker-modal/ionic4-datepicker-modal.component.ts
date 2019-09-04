@@ -304,6 +304,14 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
 
       const hightLightDate = this.highlightedDates[tempDate.getTime()];
 
+      let fontColor = null;
+
+      if (tempDate.getDay() === 0 && this.mainObj.isSundayHighlighted && this.mainObj.isSundayHighlighted.fontColor) {
+        fontColor = this.mainObj.isSundayHighlighted.fontColor;
+      } else if (hightLightDate && hightLightDate.fontColor) {
+        fontColor = hightLightDate.fontColor;
+      }
+
       this.daysList.push({
         date: tempDate.getDate(),
         month: tempDate.getMonth(),
@@ -312,7 +320,8 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
         epoch: tempDate.getTime(),
         disabled: disabled,
         color: hightLightDate && hightLightDate.color ? hightLightDate.color : null,
-        fontColor: hightLightDate && hightLightDate.fontColor ? hightLightDate.fontColor : null
+        fontColor: fontColor
+        // fontColor: hightLightDate && hightLightDate.fontColor ? hightLightDate.fontColor : null
       });
     }
 
@@ -482,6 +491,13 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
 
       this.setHightlightedDates(objConfig);
     }
+
+    objConfig.isSundayHighlighted = {};
+    if (config.isSundayHighlighted) {
+      const isSundayHighlighted = config.isSundayHighlighted;
+      objConfig.isSundayHighlighted.fontColor = isSundayHighlighted.fontColor ? isSundayHighlighted.fontColor : null;
+    }
+
     // console.log('config =>', objConfig);
     return objConfig;
   }

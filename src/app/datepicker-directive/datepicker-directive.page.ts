@@ -86,8 +86,12 @@ export class DatepickerDirectivePage implements OnInit {
         // { date: new Date('2019-07-14'), color: '#f2ef50', fontColor: '#fff' },
         // { date: new Date('2019-07-16'), color: '#ee99bf', fontColor: '#fff' },
         // { date: new Date('2019-07-18'), color: '#5000b1', fontColor: '#fff' },
-        // { date: new Date('2019-07-20'), color: '#f21250', fontColor: '#fff' },
-      ]
+        // { date: new Date('2019-09-01'), color: '#5000b1', fontColor: '#fff' },
+      ],
+
+      isSundayHighlighted: {
+        fontColor: 'grey'
+      }
     };
   }
 }

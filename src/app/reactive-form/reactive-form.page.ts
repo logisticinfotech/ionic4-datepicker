@@ -92,7 +92,10 @@ export class ReactiveFormPage implements OnInit {
       //   { date: new Date('2019-08-10'), color: '#ee17bf' },
       //   { date: new Date('2019-08-12'), color: '#50f2b1' },
       //   { date: new Date('2019-08-14'), color: '#f2ef50' },
-      // ]
+      // ],
+      // isSundayHighlighted: {
+      //   fontColor: 'red'
+      // }
     };
   }
 

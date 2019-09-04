@@ -47,8 +47,14 @@
       <ion-col>
         <ion-grid class="dp-weeks-container" *ngIf="daysList" [ngClass]="isMonthYearSelectorOpen ? 'dp-virual-scroller-hide' : 'dp-virual-scroller-show'">
           <ion-row class=" dp-weeks-name">
-            <ion-col *ngFor="let weekName of mainObj?.weeksList;">
-              <div class="weeks">{{weekName}}</div>
+            <ion-col *ngFor="let weekName of mainObj?.weeksList; let i = index">
+              <!-- <div class="weeks">{{weekName}} {{i}}</div> -->
+              <div class="weeks" *ngIf="mainObj?.mondayFirst"
+              [style.color]="mainObj?.isSundayHighlighted && i === 6 ? mainObj?.isSundayHighlighted.fontColor : ''">
+               {{weekName}}</div>
+              <div class="weeks" *ngIf="!mainObj?.mondayFirst"
+              [style.color]="mainObj?.isSundayHighlighted && i === 0 ? mainObj?.isSundayHighlighted.fontColor : ''">
+               {{weekName}}</div>
             </ion-col>
           </ion-row>
           <ion-row *ngFor="let row of rows;" class="dp-days-list">
@@ -73,10 +79,6 @@
     </ion-item>
   </ion-list>
 </ion-content>
-
-<!-- <ion-content scrollX="false" scrollY="false" no-padding class="ionic_datepicker_modal_content">
-
-</ion-content> -->
 
 <ion-footer>
   <ion-toolbar>
