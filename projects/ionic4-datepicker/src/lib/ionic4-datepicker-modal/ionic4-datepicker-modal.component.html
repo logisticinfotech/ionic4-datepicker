@@ -84,21 +84,21 @@
   <ion-toolbar>
     <ion-grid no-padding>
       <ion-row no-padding [ngClass]="mainObj?.btnCloseSetInReverse ? 'dp-btn-set-close-in-reverse' : ''">
-        <ion-col no-padding>
+        <ion-col class="ion-no-padding">
           <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}" fill="{{mainObj?.btnProperties?.fill}}"
             size="{{mainObj?.btnProperties?.size}}" color="{{mainObj?.btnProperties?.color}}" disabled="{{mainObj?.btnProperties?.disabled}}"
             strong="{{mainObj?.btnProperties?.strong}}" (click)="closeIonicDatePickerModal()">
             {{mainObj?.closeLabel}}
           </ion-button>
         </ion-col>
-        <ion-col no-padding *ngIf="mainObj?.showTodayButton">
+        <ion-col class="ion-no-padding" *ngIf="mainObj?.showTodayButton">
           <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}" fill="{{mainObj?.btnProperties?.fill}}"
             size="{{mainObj?.btnProperties?.size}}" color="{{mainObj?.btnProperties?.color}}" disabled="{{mainObj?.btnProperties?.disabled}}"
             strong="{{mainObj?.btnProperties?.strong}}" (click)="setIonicDatePickerTodayDate()">
             {{mainObj?.todayLabel}}
           </ion-button>
         </ion-col>
-        <ion-col no-padding *ngIf="!mainObj?.closeOnSelect">
+        <ion-col class="ion-no-padding" *ngIf="!mainObj?.closeOnSelect">
           <ion-button class="ion-button" expand="{{mainObj?.btnProperties?.expand}}"
             fill="{{mainObj?.btnProperties?.fill}}" size="{{mainObj?.btnProperties?.size}}"
             color="{{mainObj?.btnProperties?.color}}"
