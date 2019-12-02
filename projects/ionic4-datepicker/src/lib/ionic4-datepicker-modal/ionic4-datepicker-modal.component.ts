@@ -58,6 +58,22 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
 
   isSelectedDateFound = false;
 
+  MONTHS = {
+    JAN: 0,
+    FEB: 1,
+    MARCH: 2,
+    APRIL: 3,
+    MAY: 4,
+    JUNE: 5,
+    JULY: 6,
+    AUG: 7,
+    SEPT: 8,
+    OCT: 9,
+    NOV: 10,
+    DEC: 11,
+  };
+
+
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController,
@@ -140,13 +156,15 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
     // console.log('prevNext', this.currentDate);
     const currentMonth = this.currentDate.getMonth();
     const currentYear = this.currentDate.getFullYear();
-    if (currentYear <= this.yearsList[(this.yearsList.length - 1)] && currentMonth === 0) {
-      return;
-    }
-    if (currentMonth === 1) {
+
+    if (currentMonth === this.MONTHS.JAN) {
+      this.currentDate.setFullYear(currentYear - 1);
+      this.currentDate.setMonth(this.MONTHS.DEC);
+    } else {
       this.currentDate.setFullYear(currentYear);
+      this.currentDate.setMonth(currentMonth - 1);
     }
-    this.currentDate.setMonth(currentMonth - 1);
+
     this.data.currentMonth = this.mainObj.monthsList[currentMonth];
     this.data.currentYear = currentYear;
     this.refreshDateList(this.currentDate);
@@ -158,14 +176,15 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
     // console.log('nextNext', this.currentDate);
     const currentMonth = this.currentDate.getMonth();
     const currentYear = this.currentDate.getFullYear();
-    if (currentYear >= this.yearsList[0] && currentMonth === 11) {
-      return;
+
+    if (currentMonth === this.MONTHS.DEC) {
+      this.currentDate.setFullYear(currentYear + 1);
+      this.currentDate.setMonth(this.MONTHS.JAN);
+    } else {
+      this.currentDate.setDate(1);
+      this.currentDate.setMonth(currentMonth + 1);
     }
-    if (currentMonth === 11) {
-      this.currentDate.setFullYear(currentYear);
-    }
-    this.currentDate.setDate(1);
-    this.currentDate.setMonth(currentMonth + 1);
+
     this.data.currentMonth = this.mainObj.monthsList[currentMonth];
     this.data.currentYear = currentYear;
     this.refreshDateList(this.currentDate);
