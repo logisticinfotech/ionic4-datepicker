@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * Generated from: logisticinfotech-ionic4-datepicker.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { Ionic4DatepickerService, CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, Ionic4DatepickerComponent, Ionic4DatepickerModule, Ionic4DatepickerModalComponent } from './public_api';
+export { LiIonic4DatepickerDirective as ɵa } from './lib/li-ionic4-datepicker.directive';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9naXN0aWNpbmZvdGVjaC1pb25pYzQtZGF0ZXBpY2tlci5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0Bsb2dpc3RpY2luZm90ZWNoL2lvbmljNC1kYXRlcGlja2VyLyIsInNvdXJjZXMiOlsibG9naXN0aWNpbmZvdGVjaC1pb25pYzQtZGF0ZXBpY2tlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUlBLGdLQUFjLGNBQWMsQ0FBQztBQUU3QixPQUFPLEVBQUMsMkJBQTJCLElBQUksRUFBRSxFQUFDLE1BQU0sc0NBQXNDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEdlbmVyYXRlZCBidW5kbGUgaW5kZXguIERvIG5vdCBlZGl0LlxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vcHVibGljX2FwaSc7XG5cbmV4cG9ydCB7TGlJb25pYzREYXRlcGlja2VyRGlyZWN0aXZlIGFzIMm1YX0gZnJvbSAnLi9saWIvbGktaW9uaWM0LWRhdGVwaWNrZXIuZGlyZWN0aXZlJzsiXX0=
