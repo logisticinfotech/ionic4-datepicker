@@ -12,7 +12,7 @@ const moment = moment_;
 })
 export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
 
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, {static:false}) content: IonContent;
 
   currentDate;
   today;

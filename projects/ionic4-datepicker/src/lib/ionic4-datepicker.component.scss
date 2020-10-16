@@ -1,4 +1,7 @@
 :host {
+    display:flex;
+    align-items:center;
+
     input {
         font-size: 16px;
         margin: 6px 0px;
@@ -16,5 +19,12 @@
             outline: 0;
             box-shadow: unset;
         }
+    }
+
+    .clearButton{
+        right: 20px;
+        font-size: 18px;
+        color:#A9A9A9;
+        position:absolute;
     }
 }
