@@ -1,3 +1,3 @@
 <input type="text" class="li-dp-input" (focus)="$event.preventDefault()" (click)="openDatePicker(value)" readonly
-    [(ngModel)]="value" placeholder="placeholder" start />
+    [(ngModel)]="value" placeholder="{{placeholder}}" start />
 <ion-icon *ngIf="isSelected" (click)="resetDate()" name=close-circle class="clearButton"></ion-icon>
