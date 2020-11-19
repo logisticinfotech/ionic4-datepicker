@@ -5,6 +5,17 @@ import * as moment_ from 'moment';
 import { Ionic4DatepickerService } from '../ionic4-datepicker.service';
 const moment = moment_;
 
+export class IconDataPicker {
+    iconArrowBack: string;
+    iconArrowDropdown: string;
+    iconArrowForward: string;
+    constructor(o: any = {}) {
+      this.iconArrowBack = o.iconArrowBack || 'arrow-back';
+      this.iconArrowDropdown = o.iconArrowDropdown || 'md-arrow-dropdown';
+      this.iconArrowForward = o.iconArrowForward || 'arrow-forward';
+    }
+}
+
 @Component({
   selector: 'li-ionic4-datepicker-modal',
   templateUrl: './ionic4-datepicker-modal.component.html',
@@ -32,6 +43,7 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
   fromDate;
   toDate;
   disableWeekdays = [];
+  icon: IconDataPicker = new IconDataPicker();
   data: any = {
     currentMonth: '',
     currentYear: '',
@@ -430,9 +442,14 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
       this.selectedDate.date = config.inputDate;
     }
 
+    if (config.icon) {
+      this.icon = new IconDataPicker(config.icon || {});
+    }
+
     const objConfig: any = {};
     objConfig.from = config.fromDate ? config.fromDate : '';
     objConfig.to = config.toDate ? config.toDate : '';
+    objConfig.closeButton = typeof config.closeButton === 'boolean' ? !!config.closeButton : true;
     objConfig.showTodayButton = config.showTodayButton === undefined ? true : config.showTodayButton;
     objConfig.closeOnSelect = config.closeOnSelect ? config.closeOnSelect : false;
     objConfig.disableWeekDays = config.disableWeekDays ? config.disableWeekDays : [];

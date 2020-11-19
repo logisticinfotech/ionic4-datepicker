@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Ionic4DatepickerModalComponent } from 'ionic4-datepicker';
 import { ModalController } from '@ionic/angular';
+
+// import { Ionic4DatepickerModalComponent } from 'ionic4-datepicker';
+import { Ionic4DatepickerModalComponent } from '@projects/ionic4-datepicker/src/public_api';
 
 import * as moment_ from 'moment';
 const moment = moment_;
@@ -123,6 +125,7 @@ export class HomePage implements OnInit {
       titleLabel: 'Seleccionar fecha',
       setLabel: 'Aceptar',
       closeLabel: 'Cancelar',
+      closeButton: false,
       showTodayButton: false,
       clearButton: false,
       monthsList,
