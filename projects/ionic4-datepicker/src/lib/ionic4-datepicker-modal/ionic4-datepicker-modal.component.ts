@@ -5,6 +5,17 @@ import * as moment_ from 'moment';
 import { Ionic4DatepickerService } from '../ionic4-datepicker.service';
 const moment = moment_;
 
+export class IconDataPicker {
+    iconArrowBack: string;
+    iconArrowDropdown: string;
+    iconArrowForward: string;
+    constructor(o: any = {}) {
+      this.iconArrowBack = o.iconArrowBack || 'arrow-back';
+      this.iconArrowDropdown = o.iconArrowDropdown || 'md-arrow-dropdown';
+      this.iconArrowForward = o.iconArrowForward || 'arrow-forward';
+    }
+}
+
 @Component({
   selector: 'li-ionic4-datepicker-modal',
   templateUrl: './ionic4-datepicker-modal.component.html',
@@ -32,6 +43,7 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
   fromDate;
   toDate;
   disableWeekdays = [];
+  icon: IconDataPicker = new IconDataPicker();
   data: any = {
     currentMonth: '',
     currentYear: '',
@@ -372,7 +384,8 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
   closeModal(selectedDate) {
     // console.log('closeModal => ', selectedDate);
     this.modalCtrl.getTop();
-    const formattedDate = moment(selectedDate).format(this.mainObj.dateFormat);
+    const enc = (selectedDate && moment(selectedDate, this.mainObj.dateFormat).format(this.mainObj.dateFormat) !== selectedDate);
+    const formattedDate = enc ? moment(selectedDate).format(this.mainObj.dateFormat) : selectedDate;
     this.modalCtrl.dismiss({ 'date': formattedDate });
   }
 
@@ -429,9 +442,14 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
       this.selectedDate.date = config.inputDate;
     }
 
+    if (config.icon) {
+      this.icon = new IconDataPicker(config.icon || {});
+    }
+
     const objConfig: any = {};
     objConfig.from = config.fromDate ? config.fromDate : '';
     objConfig.to = config.toDate ? config.toDate : '';
+    objConfig.closeButton = typeof config.closeButton === 'boolean' ? !!config.closeButton : true;
     objConfig.showTodayButton = config.showTodayButton === undefined ? true : config.showTodayButton;
     objConfig.closeOnSelect = config.closeOnSelect ? config.closeOnSelect : false;
     objConfig.disableWeekDays = config.disableWeekDays ? config.disableWeekDays : [];
@@ -456,6 +474,10 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
     objConfig.yearInAscending = config.yearInAscending ? config.yearInAscending : false;
     objConfig.momentLocale = config.momentLocale ? config.momentLocale : 'en-US';
 
+    if (!!this.selectedDate.date && moment(this.selectedDate.date, objConfig.dateFormat).format(objConfig.dateFormat) !== this.selectedDate.date) {
+      this.selectedDate.date = moment(this.selectedDate.date).format(objConfig.dateFormat) ;
+    }
+  
     moment.locale(objConfig.momentLocale);
     objConfig.inputDate = this.selectedDate.date ? moment(this.selectedDate.date, objConfig.dateFormat).toDate() : new Date();
 

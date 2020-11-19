@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -33,6 +33,15 @@
           <ion-label position="floating">Directive way Disabled</ion-label>
           <ion-input readonly [(ngModel)]="mydatePtBr" (ionChange)="onChangeDate()" [disabled]="isDisableDatePicker"
             [liIonic4Datepicker]="datePickerObjPtBr"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Date Format DD/MM/YYYY</ion-label>
+          <ion-input readonly [(ngModel)]="mydatePtBrFormat" (ionChange)="onChangeDate()" [disabled]="isDisableDatePicker"
+            [liIonic4Datepicker]="datePickerObjDDMMYYY"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

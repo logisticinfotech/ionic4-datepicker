@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Ionic4DatepickerModalComponent } from 'ionic4-datepicker';
 import { ModalController } from '@ionic/angular';
+
+// import { Ionic4DatepickerModalComponent } from 'ionic4-datepicker';
+import { Ionic4DatepickerModalComponent } from '@projects/ionic4-datepicker/src/public_api';
 
 import * as moment_ from 'moment';
 const moment = moment_;
@@ -22,6 +24,7 @@ export class HomePage implements OnInit {
   datePickerObj: any = {};
   datePickerObjPtBr: any = {};
   mydatePtBr = '06 Fev 2019';
+  mydatePtBrFormat = '13/05/1991';
 
   isDisableDatePicker: false;
   monthsList = [
@@ -42,7 +45,7 @@ export class HomePage implements OnInit {
 
   selectedDate;
 
-  constructor(public modalCtrl: ModalController) {}
+  constructor(public modalCtrl: ModalController) { }
 
   ngOnInit() {
     const disabledDates: Date[] = [
@@ -107,6 +110,29 @@ export class HomePage implements OnInit {
     };
   }
 
+  get datePickerObjDDMMYYY() {
+    const betweenYear = [5, 80];
+    moment.locale('es');
+    const monthsList = moment.monthsShort();
+    const weeksList = moment.weekdaysShort();
+    return {
+      inputDate: moment().subtract(betweenYear[0], 'year'),
+      fromDate: moment().subtract(betweenYear[1], 'year'),
+      toDate: moment().subtract(betweenYear[0], 'year'),
+      closeOnSelect: true,
+      btnCloseSetInReverse: true,
+      dateFormat: 'DD/MM/YYYY',
+      titleLabel: 'Seleccionar fecha',
+      setLabel: 'Aceptar',
+      closeLabel: 'Cancelar',
+      closeButton: false,
+      showTodayButton: false,
+      clearButton: false,
+      monthsList,
+      weeksList
+    };
+  }
+
   onChangeDate() {
     console.log('onChangeDate date ', this.mydate);
   }
@@ -150,8 +176,10 @@ export class HomePage implements OnInit {
 
     datePickerModal.onDidDismiss().then(data => {
       // this.isModalOpen = false;
-      console.log(data);
-      this.selectedDate = data.data.date;
+      if (data && data.data) {
+        console.log(data);
+        this.selectedDate = data.data.date;
+      }
     });
   }
 }

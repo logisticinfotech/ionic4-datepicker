@@ -129,6 +129,7 @@
             color: var(--ion-color-primary-contrast);
             border-radius: 4px;
             font-weight: 500;
+            padding: unset;
         }
 
         .dp-today {
@@ -136,6 +137,7 @@
             font-weight: 500;
             border: 1px solid;
             border-color: var(--ion-color-primary);
+            padding: unset;
         }
 
         .dp-month-year-scroll-container {
@@ -171,6 +173,7 @@
 
     .disabled {
         color: #AAAAAA;
+        padding: unset;
     }
 
     .dp-virual-scroller-show {
@@ -228,5 +231,9 @@
                 }
             }
         }
+    }
+
+    .ion-no-padding {
+        padding: 0;
     }
 }
