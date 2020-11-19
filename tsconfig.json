@@ -19,6 +19,9 @@
       "dom"
     ],
     "paths": {
+      "@projects/*": [
+        "projects/*"
+      ],
       "ionic4-datepicker": [
         "dist/ionic4-datepicker"
       ],

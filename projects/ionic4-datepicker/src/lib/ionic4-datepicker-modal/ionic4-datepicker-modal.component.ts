@@ -372,7 +372,8 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
   closeModal(selectedDate) {
     // console.log('closeModal => ', selectedDate);
     this.modalCtrl.getTop();
-    const formattedDate = moment(selectedDate).format(this.mainObj.dateFormat);
+    const enc = (selectedDate && moment(selectedDate, this.mainObj.dateFormat).format(this.mainObj.dateFormat) !== selectedDate);
+    const formattedDate = enc ? moment(selectedDate).format(this.mainObj.dateFormat) : selectedDate;
     this.modalCtrl.dismiss({ 'date': formattedDate });
   }
 
@@ -456,6 +457,10 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
     objConfig.yearInAscending = config.yearInAscending ? config.yearInAscending : false;
     objConfig.momentLocale = config.momentLocale ? config.momentLocale : 'en-US';
 
+    if (!!this.selectedDate.date && moment(this.selectedDate.date, objConfig.dateFormat).format(objConfig.dateFormat) !== this.selectedDate.date) {
+      this.selectedDate.date = moment(this.selectedDate.date).format(objConfig.dateFormat) ;
+    }
+  
     moment.locale(objConfig.momentLocale);
     objConfig.inputDate = this.selectedDate.date ? moment(this.selectedDate.date, objConfig.dateFormat).toDate() : new Date();
 
