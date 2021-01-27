@@ -109,7 +109,7 @@ export class Ionic4DatepickerModalComponent implements OnInit, OnDestroy {
     const iditem = index + 'list';
 
     setTimeout(() => {
-      document.getElementById(iditem).scrollIntoView();
+      document.getElementById(iditem).scrollIntoView(false);
     }, 100);
   }
 
